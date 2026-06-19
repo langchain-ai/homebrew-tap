@@ -1,0 +1,6 @@
+# Default owner for everything in this tap.
+# Swap @darieldatoon for an org team (e.g. @langchain-ai/cli) when one exists.
+*               @darieldatoon
+
+# Formulae
+/Formula/       @darieldatoon
