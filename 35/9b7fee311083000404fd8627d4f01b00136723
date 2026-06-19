@@ -1,0 +1,25 @@
+.github/workflows/tests.yml
+  s_e33299bbbf2f72::t_93f36e5517647e 27
+  s_e33299bbbf2f72::t_cd08cd2a02b594 32
+  s_e33299bbbf2f72::t_c4a7652ee1794a 48
+.github/workflows/publish.yml
+  s_e33299bbbf2f72::t_bb348308087ae7 25
+  s_e33299bbbf2f72::t_a6a501f9bc0955 20
+  s_e33299bbbf2f72::t_a8343cd7a5ae3c 34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "359b7fee311083000404fd8627d4f01b00136723",
+  "prompts": {},
+  "sessions": {
+    "s_e33299bbbf2f72": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17407f29-7856-485e-8e3e-90e3f615d6e7",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Dariel Dato-on <293921406+darieldatoon@users.noreply.github.com>"
+    }
+  }
+}
