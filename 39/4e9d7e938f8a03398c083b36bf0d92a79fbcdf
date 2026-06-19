@@ -1,0 +1,23 @@
+README.md
+  s_e33299bbbf2f72::t_75dc9cbca84905 1,3,5,7-16,18,22,25-30,33
+Formula/langsmith-cli.rb
+  s_e33299bbbf2f72::t_7c4c67c8943ac3 1-26
+.gitignore
+  s_e33299bbbf2f72::t_96af0e55fccf67 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "394e9d7e938f8a03398c083b36bf0d92a79fbcdf",
+  "prompts": {},
+  "sessions": {
+    "s_e33299bbbf2f72": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17407f29-7856-485e-8e3e-90e3f615d6e7",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Dariel Dato-on <293921406+darieldatoon@users.noreply.github.com>"
+    }
+  }
+}
