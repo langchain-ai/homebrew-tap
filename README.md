@@ -1,32 +1,32 @@
 # LangChain Homebrew Tap
 
-Homebrew formulae maintained by [LangChain](https://github.com/langchain-ai).
+Homebrew formulae and casks maintained by [LangChain](https://github.com/langchain-ai).
 
 ## Install
 
 ```sh
-brew install langchain-ai/tap/langsmith-cli
+brew install langchain-ai/tap/<package>
 ```
 
 Or tap first, then install:
 
 ```sh
 brew tap langchain-ai/tap
-brew install langsmith-cli
+brew install <package>
 ```
 
 Or in a `brew bundle` `Brewfile`:
 
 ```ruby
 tap "langchain-ai/tap"
-brew "langsmith-cli"
+brew "<package>"
 ```
 
-## Formulae
+## Packages
 
-| Formula | Description |
-| ------- | ----------- |
-| `langsmith-cli` | Agent-first CLI (`langsmith`) for querying and managing [LangSmith](https://smith.langchain.com) resources. |
+| Package | Type | Description |
+| ------- | ---- | ----------- |
+| `langsmith-cli` | formula | Agent-first CLI (`langsmith`) for [LangSmith](https://smith.langchain.com) resources. |
 
 ## Documentation
 
