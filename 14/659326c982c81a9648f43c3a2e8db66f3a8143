@@ -1,0 +1,21 @@
+.github/CODEOWNERS
+  s_e33299bbbf2f72::t_c3db15a9264160 1-6
+.github/dependabot.yml
+  s_e33299bbbf2f72::t_c5c4d60a83aef1 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "14659326c982c81a9648f43c3a2e8db66f3a8143",
+  "prompts": {},
+  "sessions": {
+    "s_e33299bbbf2f72": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17407f29-7856-485e-8e3e-90e3f615d6e7",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Dariel Dato-on <293921406+darieldatoon@users.noreply.github.com>"
+    }
+  }
+}
