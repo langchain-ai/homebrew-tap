@@ -1,0 +1,71 @@
+name: regen deepagents-code
+
+# Re-pin Formula/deepagents-code.rb to a deepagents-code release (latest by
+# default) by re-resolving its wheel set with uv, then open a PR. The existing
+# `brew test-bot` workflow (tests.yml) validates the PR across the OS matrix.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "deepagents-code version to pin (blank = latest on PyPI)"
+        required: false
+        type: string
+  schedule:
+    # Weekly: catch new releases automatically (Mondays 07:00 UTC).
+    - cron: "0 7 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  regen:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
+
+      - name: Regenerate formula
+        id: regen
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          if [ -n "$VERSION" ]; then
+            uv run --no-project --python 3.13 \
+              scripts/regen_deepagents_code.py --version "$VERSION"
+          else
+            uv run --no-project --python 3.13 \
+              scripts/regen_deepagents_code.py
+          fi
+
+      - name: Read pinned version
+        id: pinned
+        run: |
+          v="$(sed -n 's#.*/deepagents_code-\([0-9][^-]*\)-py3-none-any\.whl.*#\1#p' \
+                Formula/deepagents-code.rb | head -1)"
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          add-paths: Formula/deepagents-code.rb
+          branch: regen/deepagents-code
+          delete-branch: true
+          commit-message: "deepagents-code ${{ steps.pinned.outputs.version }} (regenerate wheels)"
+          title: "deepagents-code ${{ steps.pinned.outputs.version }}"
+          body: |
+            Automated regeneration of `Formula/deepagents-code.rb` for
+            `deepagents-code==${{ steps.pinned.outputs.version }}`.
+
+            Wheels re-pinned (URL + sha256) via
+            `scripts/regen_deepagents_code.py`. `brew test-bot` (tests.yml)
+            validates this PR across the OS matrix.
+          labels: |
+            automated
+            dependencies
