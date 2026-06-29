@@ -1,0 +1,24 @@
+name: bump formulae
+
+on:
+  schedule:
+    - cron: "0 16 * * *" # daily at 16:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      # Detects new upstream releases via `brew livecheck` and opens a PR
+      # updating the formula's url + sha256. Uses a scoped PAT (not
+      # GITHUB_TOKEN) so the resulting PR triggers the test-bot workflow.
+      - name: Open bump PRs for outdated formulae
+        uses: dawidd6/action-homebrew-bump-formula@1446dca236b0440c6f02723a3f14f13be2c04ab0 # v7
+        with:
+          token: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+          tap: langchain-ai/homebrew-tap
+          formula: langsmith-cli
+          livecheck: true
