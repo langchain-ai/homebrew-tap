@@ -1,0 +1,19 @@
+.github/workflows/publish.yml
+  s_e33299bbbf2f72::t_299029f9e1d826 34-38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "8481c07f5f33adfaca2883a6feda29ec2ef87919",
+  "prompts": {},
+  "sessions": {
+    "s_e33299bbbf2f72": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17407f29-7856-485e-8e3e-90e3f615d6e7",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Dariel Dato-on <293921406+darieldatoon@users.noreply.github.com>"
+    }
+  }
+}
