@@ -1,0 +1,21 @@
+.github/workflows/publish.yml
+  s_e33299bbbf2f72::t_599ff4816f31bd 27
+.github/workflows/bump.yml
+  s_e33299bbbf2f72::t_78cc4a7bd6c55f 22,32-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "140f61036dd696427eee4d68828d74216063c9f6",
+  "prompts": {},
+  "sessions": {
+    "s_e33299bbbf2f72": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17407f29-7856-485e-8e3e-90e3f615d6e7",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Dariel Dato-on <293921406+darieldatoon@users.noreply.github.com>"
+    }
+  }
+}
