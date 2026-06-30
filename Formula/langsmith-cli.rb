@@ -4,6 +4,7 @@ class LangsmithCli < Formula
   url "https://github.com/langchain-ai/langsmith-cli/archive/refs/tags/v0.2.38.tar.gz"
   sha256 "dacc7f07371e33f8f9a553469cbbdae98bf7d784e84328d4691a7b623e6f9e51"
   license "MIT"
+  revision 1
   head "https://github.com/langchain-ai/langsmith-cli.git", branch: "main"
 
   depends_on "go" => :build
