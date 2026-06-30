@@ -1,0 +1,37 @@
+name: bump formulae
+
+on:
+  schedule:
+    - cron: "0 16 * * *" # daily at 16:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      # Mint a short-lived token for the org-installed langchain-actions-pr-bot
+      # App. A PR opened with GITHUB_TOKEN would not trigger the test-bot
+      # workflow; an App-authored PR does, so the bottle CI runs on the bump.
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: "Iv23liMFOFBcPTKFWi3S"
+          private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PRIVATE_KEY }}
+          repositories: homebrew-tap
+
+      # Detects new upstream releases via `brew livecheck` and opens a PR
+      # updating the formula's url + sha256.
+      - name: Open bump PRs for outdated formulae
+        uses: dawidd6/action-homebrew-bump-formula@1446dca236b0440c6f02723a3f14f13be2c04ab0 # v7
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          # Push the bump branch directly to the tap rather than forking: the
+          # app bot has write access and cannot own a personal fork.
+          no_fork: true
+          tap: langchain-ai/homebrew-tap
+          formula: langsmith-cli
+          livecheck: true
