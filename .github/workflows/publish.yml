@@ -13,10 +13,21 @@ jobs:
       actions: read
       checks: read
       contents: write
-      issues: read
       packages: write
       pull-requests: write
     steps:
+      # Mint a short-lived token for the org-installed langchain-actions-pr-bot
+      # App. Used only to push the bottle commit to main below: the bot is an
+      # `always` bypass actor on the main ruleset, whereas GITHUB_TOKEN
+      # (github-actions[bot]) is not and would be rejected.
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: "Iv23liMFOFBcPTKFWi3S"
+          private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PRIVATE_KEY }}
+          repositories: homebrew-tap
+
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@6315ef70a8bfcd2c71104383846591ac113ace33 # main
         with:
@@ -36,6 +47,7 @@ jobs:
       - name: Push commits
         uses: Homebrew/actions/git-try-push@6315ef70a8bfcd2c71104383846591ac113ace33 # main
         with:
+          token: ${{ steps.app-token.outputs.token }}
           branch: main
 
       - name: Delete branch
