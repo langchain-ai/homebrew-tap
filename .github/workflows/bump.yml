@@ -19,7 +19,7 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
-          app-id: "Iv23liMFOFBcPTKFWi3S"
+          client-id: "Iv23liMFOFBcPTKFWi3S"
           private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PRIVATE_KEY }}
           repositories: homebrew-tap
 
@@ -29,6 +29,11 @@ jobs:
         uses: dawidd6/action-homebrew-bump-formula@1446dca236b0440c6f02723a3f14f13be2c04ab0 # v7
         with:
           token: ${{ steps.app-token.outputs.token }}
+          # Commit identity for langtions-bot[bot]. Set explicitly so the action
+          # skips its GitHub `/user` API call, which app/installation tokens
+          # are forbidden from making (it 403s otherwise).
+          user_name: "langtions-bot[bot]"
+          user_email: "261626216+langtions-bot[bot]@users.noreply.github.com"
           # Push the bump branch directly to the tap rather than forking: the
           # app bot has write access and cannot own a personal fork.
           no_fork: true
