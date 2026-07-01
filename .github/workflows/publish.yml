@@ -40,6 +40,10 @@ jobs:
       - name: Set up git
         uses: Homebrew/actions/git-user-config@6315ef70a8bfcd2c71104383846591ac113ace33 # main
 
+      # Uploads bottles to ghcr and commits the bottle block to main. NOTE: a
+      # NEW formula's ghcr package is created private; an org owner must make it
+      # public once before `brew install` can fetch its bottles. See the README
+      # "Maintaining" section.
       - name: Pull bottles
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
