@@ -1,0 +1,19 @@
+Formula/langsmith-cli.rb
+  s_618a823ded792f::t_dbeb67fd032b0a 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "f31a7cd54e212de245d24b69d48b211cb853b7b8",
+  "prompts": {},
+  "sessions": {
+    "s_618a823ded792f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "21618759-f273-4855-9216-d09304911832",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Dariel Dato-on <293921406+darieldatoon@users.noreply.github.com>"
+    }
+  }
+}
