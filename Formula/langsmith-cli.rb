@@ -7,6 +7,12 @@ class LangsmithCli < Formula
   revision 1
   head "https://github.com/langchain-ai/langsmith-cli.git", branch: "main"
 
+  bottle do
+    root_url "https://ghcr.io/v2/langchain-ai/tap"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "6fbb4e83a482c5378b7fcda6c9176c006c45b43ffc79112e18906f85932dfd84"
+    sha256 cellar: :any,                 x86_64_linux: "7d01a14f197beea68224110b75b232e8b489ca02d61b0b95bdeffc7a5b35a078"
+  end
+
   depends_on "go" => :build
 
   def install
