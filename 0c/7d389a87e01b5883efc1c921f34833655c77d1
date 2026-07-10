@@ -1,0 +1,19 @@
+README.md
+  s_618a823ded792f::t_86744e28206561 38-46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "0c7d389a87e01b5883efc1c921f34833655c77d1",
+  "prompts": {},
+  "sessions": {
+    "s_618a823ded792f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "21618759-f273-4855-9216-d09304911832",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Dariel Dato-on <293921406+darieldatoon@users.noreply.github.com>"
+    }
+  }
+}
