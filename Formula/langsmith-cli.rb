@@ -1,8 +1,8 @@
 class LangsmithCli < Formula
   desc "Agent-first CLI for querying and managing LangSmith resources"
   homepage "https://github.com/langchain-ai/langsmith-cli"
-  url "https://github.com/langchain-ai/langsmith-cli/archive/refs/tags/v0.2.41.tar.gz"
-  sha256 "c62636b8ab94fc319a27e0afdbb933cdbe6bc999841d3a54689864b001164b4a"
+  url "https://github.com/langchain-ai/langsmith-cli/archive/refs/tags/v0.2.42.tar.gz"
+  sha256 "16c471a03405122dd08d7a8870a24fcaef6193b5233d48e63fa1dda6a62f767d"
   license "MIT"
   head "https://github.com/langchain-ai/langsmith-cli.git", branch: "main"
 
