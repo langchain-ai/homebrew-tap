@@ -38,7 +38,7 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Set up git
-        uses: Homebrew/actions/git-user-config@18fcb8e3e06b4247c676c506750dc95ea7226479 # main
+        uses: Homebrew/actions/git-user-config@df4b09108a1de9d6f995fe68f302b3f68bd6d2ef # main
 
       # Uploads bottles to ghcr and commits the bottle block to main. NOTE: a
       # NEW formula's ghcr package is created private; an org owner must make it
