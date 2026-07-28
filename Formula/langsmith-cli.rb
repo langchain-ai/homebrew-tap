@@ -8,8 +8,8 @@ class LangsmithCli < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/langchain-ai/tap"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "828d1cc5d47671e8832a6c39d1dbefb9eab7fce872a33f34060a55d4e6f19a03"
-    sha256 cellar: :any,                 x86_64_linux: "58fb7cebdaec4204f01d93ad6d95f86bdad9adbf7bc5bc0c921c3328da97f7f0"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "09c892aad91ec293fbbb4c0aaa3ae1980fe7b007c9171a6d4bdd722c3287c0b5"
+    sha256 cellar: :any,                 x86_64_linux: "b2bda89af5391d8a4d05a5195e39b498fbc0a8fe0b506b9b832c12f6478c7dd4"
   end
 
   depends_on "go" => :build
