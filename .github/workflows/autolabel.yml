@@ -1,0 +1,125 @@
+name: auto pr-pull
+
+# Applies the `pr-pull` label to a bump PR once `brew test-bot` is green,
+# which triggers publish.yml. This is the publish gate: `brew pr-pull` takes
+# the bottle artifacts built by that PR's own CI run, uploads them to ghcr and
+# commits them to main. Nothing downstream re-checks provenance, so the guards
+# in the `verify` job below are the whole security boundary — only bump PRs
+# authored by langtions-bot, on a branch in this repo, touching nothing but a
+# formula, are ever labelled. Anything else falls back to a human label.
+#
+# This workflow deliberately never checks out or executes the PR's code. It
+# runs in the base-repo context with a token that can write to the repo, so
+# running head-ref code here would hand that token to the PR author.
+
+on:
+  workflow_run:
+    workflows: ["brew test-bot"]
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    # test-bot also runs on pushes to main; only PR runs can be labelled.
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+    # Read-only: this job decides, it never writes. Labelling happens in the
+    # `label` job below, under the App token.
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      pr: ${{ steps.check.outputs.pr }}
+    steps:
+      - name: Resolve PR and check it is an unmodified bot bump
+        id: check
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        with:
+          script: |
+            const run = context.payload.workflow_run;
+
+            // workflow_run.pull_requests is unreliable (empty for forks), so
+            // resolve from the head SHA instead and re-read the PR fresh —
+            // the payload is a snapshot from when the run started.
+            const { data: matches } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: run.head_sha,
+            });
+            if (matches.length !== 1) {
+              core.info(`head_sha ${run.head_sha} maps to ${matches.length} PRs; not labelling`);
+              return;
+            }
+
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: matches[0].number,
+            });
+
+            const reject = (why) => core.info(`PR #${pr.number}: ${why}; not labelling`);
+
+            if (pr.state !== 'open') return reject('not open');
+            if (pr.draft) return reject('draft');
+
+            // Bump branches are pushed straight to this repo (no_fork: true),
+            // so a fork PR is never a legitimate bump.
+            if (pr.head.repo === null || pr.head.repo.full_name !== `${context.repo.owner}/${context.repo.repo}`) {
+              return reject('head is a fork');
+            }
+            if (pr.base.ref !== 'main') return reject(`base is ${pr.base.ref}, not main`);
+
+            if (pr.user.login !== 'langtions-bot[bot]') {
+              return reject(`author is ${pr.user.login}, not langtions-bot[bot]`);
+            }
+
+            if (pr.labels.some((l) => l.name === 'pr-pull')) return reject('already labelled');
+
+            // Verify the run we are reacting to actually tested the PR's
+            // current head, not an older push that has since been amended.
+            if (run.head_sha !== pr.head.sha) {
+              return reject(`test-bot ran against ${run.head_sha}, head is now ${pr.head.sha}`);
+            }
+
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.number,
+              per_page: 100,
+            });
+            const offending = files.filter((f) => !/^Formula\/[^/]+\.rb$/.test(f.filename));
+            if (offending.length > 0) {
+              return reject(`touches ${offending.map((f) => f.filename).join(', ')}`);
+            }
+
+            core.info(`PR #${pr.number} is a clean bot bump; labelling`);
+            core.setOutput('pr', String(pr.number));
+
+  label:
+    needs: verify
+    if: needs.verify.outputs.pr != ''
+    runs-on: ubuntu-latest
+    # All writes go through the App token, not GITHUB_TOKEN.
+    permissions: {}
+    steps:
+      # Must be the App token, not GITHUB_TOKEN: events raised by GITHUB_TOKEN
+      # do not start new workflow runs, so a GITHUB_TOKEN label would never
+      # fire publish.yml's `pull_request_target: labeled` trigger.
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: "Iv23liMFOFBcPTKFWi3S"
+          private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PRIVATE_KEY }}
+          repositories: homebrew-tap
+
+      - name: Add pr-pull label
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          PR: ${{ needs.verify.outputs.pr }}
+        run: gh pr edit "$PR" --repo "$GITHUB_REPOSITORY" --add-label pr-pull

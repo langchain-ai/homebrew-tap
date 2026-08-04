@@ -1,8 +1,12 @@
 name: bump formulae
 
+# Manual fallback, deliberately not scheduled. Upstream repos push their own
+# bumps here on tag (see langsmith-cli's release.yml `bump-tap` job), so this
+# only exists to recover a release whose push failed, and to cover formulae
+# with no push wired up. Safe to run at any time: `brew livecheck` opens
+# nothing for a formula that is already current.
+
 on:
-  schedule:
-    - cron: "0 16 * * *" # daily at 16:00 UTC
   workflow_dispatch:
 
 permissions:
