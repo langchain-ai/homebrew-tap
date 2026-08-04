@@ -35,14 +35,28 @@ Packages (ghcr.io). To publish bottles for a formula, add the **`pr-pull`**
 label to its PR once `test-bot` is green; `langchain-actions-pr-bot` then
 commits the bottle block to `main` and uploads the bottles.
 
-**Label the bump PR — do not click Merge.** The `pr-pull` label *is* the
-publish trigger. `test-bot` going green only builds the bottles as PR
-artifacts; it does not publish them. Merging the PR manually lands the version
-bump (`url` + `sha256`) on `main` but skips `brew pr-pull` entirely, so no
-bottles are built and the formula keeps whatever stale bottle block it had.
+**Releases of `langsmith-cli` need no manual step.** Tagging a release there
+opens a bump PR here (its `bump-tap` job), and `auto pr-pull` applies the
+`pr-pull` label as soon as `test-bot` is green — tag to published bottles with
+no human in the loop. `auto pr-pull` only labels PRs that are authored by
+`langtions-bot`, on a branch in this repo, and touch nothing but `Formula/*.rb`;
+anything failing those checks waits for a human label as below.
+
+**For everything else: label the bump PR — do not click Merge.** The `pr-pull`
+label *is* the publish trigger. `test-bot` going green only builds the bottles
+as PR artifacts; it does not publish them. Merging the PR manually lands the
+version bump (`url` + `sha256`) on `main` but skips `brew pr-pull` entirely, so
+no bottles are built and the formula keeps whatever stale bottle block it had.
 If you already merged, recover with a **rebottle PR**: bump `revision` by 1
 (audit requires exactly +1 from `main`), remove the stale `bottle do` block,
 open a PR, and add `pr-pull` once `test-bot` is green.
+
+**If a release never opened a bump PR here**, run the **bump formulae** workflow
+(Actions → *bump formulae* → *Run workflow*). It uses `brew livecheck` to find
+any formula behind its upstream and opens the PR the release should have; a
+formula already at the latest version is skipped, so it is safe to run anytime.
+It is manual-only on purpose — the upstream push is the normal path, and a cron
+would just race it.
 
 **First bottle for a new formula requires a one-time manual step.** The ghcr
 package is created **private**, and this org disables public packages by
