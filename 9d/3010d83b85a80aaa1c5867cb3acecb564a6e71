@@ -1,0 +1,35 @@
+README.md
+  s_4394cb687b2dd8::t_9c0da26e883f9d 54-60
+  s_bf53db671a5be3::t_5cd8028088b651 38-49
+.github/workflows/bump.yml
+  s_4394cb687b2dd8::t_be20abb6dfccd6 3-7
+  s_bf53db671a5be3::t_f76b4c5fd8a057 8
+.github/workflows/autolabel.yml
+  s_bf53db671a5be3::t_f342887573bd44 107-108
+  s_bf53db671a5be3::t_a151fbafefcd75 1-30,36-106,109-125
+  s_bf53db671a5be3::t_2d765bef6008eb 31-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "9d3010d83b85a80aaa1c5867cb3acecb564a6e71",
+  "prompts": {},
+  "sessions": {
+    "s_4394cb687b2dd8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cb63bfe0-0cad-4c49-8008-91452490f25b",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Dariel Dato-on <293921406+darieldatoon@users.noreply.github.com>"
+    },
+    "s_bf53db671a5be3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3a1a00bd-8e90-4f39-a9f1-f99452890bdb",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Dariel Dato-on <293921406+darieldatoon@users.noreply.github.com>"
+    }
+  }
+}
