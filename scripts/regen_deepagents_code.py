@@ -128,19 +128,28 @@ def run_compile(reqfile: Path, triple: str, outfile: Path) -> None:
         die(f"`uv pip compile` failed for {triple}:\n{proc.stderr.strip()}")
 
 
-def wheel_score(filename: str) -> tuple[int, int]:
+def wheel_score(filename: str) -> tuple[int, int, int]:
     """Rank wheels so we pick what pip/uv would install: prefer an exact cp313
-    wheel, then the highest cpXX-abi3 (stable ABI), then py3-none."""
+    wheel, then the highest cpXX-abi3 (stable ABI), then py3-none. Within a
+    tier, prefer a platform-specific wheel over `any`.
+
+    Do not drop the trailing platform rank. `uv` lists every wheel compatible
+    with the target, and some projects ship a `py3-none-any` wheel alongside
+    real platform wheels; both carry ABI tag `none` and would otherwise tie.
+    wasmtime's `any` wheel holds only the Windows DLL, so losing that tie-break
+    silently pins a package with no loadable library on macOS/Linux.
+    """
     parts = filename[:-4].split("-")  # strip .whl
-    pytag, abitag = parts[-3], parts[-2]
+    pytag, abitag, plattag = parts[-3], parts[-2], parts[-1]
+    plat = 0 if plattag == "any" else 1
     cp = lambda t: int(t[2:]) if t.startswith("cp") and t[2:].isdigit() else 0
     if abitag == f"cp{PYTHON_VERSION.replace('.', '')}":
-        return (3, int(PYTHON_VERSION.split(".")[1]))
+        return (3, int(PYTHON_VERSION.split(".")[1]), plat)
     if abitag == "abi3":
-        return (2, cp(pytag))
+        return (2, cp(pytag), plat)
     if abitag == "none":
-        return (1, 0)
-    return (2, cp(pytag))
+        return (1, 0, plat)
+    return (2, cp(pytag), plat)
 
 
 def pick_wheel(pkg: dict) -> dict | None:

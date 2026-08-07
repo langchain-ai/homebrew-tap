@@ -30,8 +30,8 @@ class DeepagentsCode < Formula
 
   desc "Terminal coding agent (dcode) for Deep Agents"
   homepage "https://github.com/langchain-ai/deepagents"
-  url "https://files.pythonhosted.org/packages/68/f1/e1d427ed9486a5e99a092a21f9d69821828ba4727bb8a6f1b6bc826216f0/deepagents_code-0.1.20-py3-none-any.whl", using: :nounzip
-  sha256 "96474c3c90ef29ff73b990bdb6f8878f9a0a8381ca3fae7df096296ec78f9766"
+  url "https://files.pythonhosted.org/packages/0f/69/a6c6319e4b9e15f14efdde4752d00db81d1921ec7297f8d75596fc2802ef/deepagents_code-0.1.54-py3-none-any.whl", using: :nounzip
+  sha256 "fbfd0fc31caf5a8b0f1ff4ddea4da0de7837b0ffd3e6a222118c6480c99671ae"
   license "MIT"
 
   # Installs from prebuilt PyPI wheels via uv - no source compilation.
@@ -46,19 +46,24 @@ class DeepagentsCode < Formula
     depends_on arch: :arm64
 
     on_arm do
+      resource "bsdiff4" do
+        url "https://files.pythonhosted.org/packages/d8/4c/825a16932605d305501ed144ae5567a3dc90c9164a393c61cc0ed68df3f0/bsdiff4-1.2.6-cp313-cp313-macosx_11_0_arm64.whl"
+        sha256 "ee4417341712a4bf736694ce9ad3902b8c6fbd3425aadca44df9b66a51bbefa4"
+      end
+
       resource "cffi" do
-        url "https://files.pythonhosted.org/packages/4a/d2/a6c0296814556c68ee32009d9c2ad4f85f2707cdecfd7727951ec228005d/cffi-2.0.0-cp313-cp313-macosx_11_0_arm64.whl"
-        sha256 "45d5e886156860dc35862657e1494b9bae8dfa63bf56796f2fb56e1679fc0bca"
+        url "https://files.pythonhosted.org/packages/55/41/4c7042f317b9217502988f0873af87e16ad606dc20f84e546e3e6ce9764c/cffi-2.1.1-cp313-cp313-macosx_11_0_arm64.whl"
+        sha256 "19ee6127ee34de7d83ce3d371ebc5ed91addbdcc39f9ab15ce4eb35a4e534971"
       end
 
       resource "charset-normalizer" do
-        url "https://files.pythonhosted.org/packages/c1/3b/66777e39d3ae1ddc77ee606be4ec6d8cbd4c801f65e5a1b6f2b11b8346dd/charset_normalizer-3.4.7-cp313-cp313-macosx_10_13_universal2.whl"
-        sha256 "f496c9c3cc02230093d8330875c4c3cdfc3b73612a5fd921c65d39cbcef08063"
+        url "https://files.pythonhosted.org/packages/b2/06/97ec2aeae780b31d742b6352218b43841a6871e2564578ca522dce4a45c3/charset_normalizer-3.4.9-cp313-cp313-macosx_10_13_universal2.whl"
+        sha256 "440eede837960000d74978f0eba527be106b5b9aee0daf779d395276ed0b0614"
       end
 
       resource "cryptography" do
-        url "https://files.pythonhosted.org/packages/9b/22/adf66990e63584a68dfb50c24f48a125c07b1699899381c8151e63ed458c/cryptography-49.0.0-cp311-abi3-macosx_11_0_arm64.whl"
-        sha256 "966fe0e9c67490071f14c0d2b1cb2dfb3023c5ce39457343931415f08382f2db"
+        url "https://files.pythonhosted.org/packages/c5/5c/59086b4aac5e879d38ddbcf74e4be7ade89cebc3eb199a55da998c3bb46a/cryptography-50.0.0-cp311-abi3-macosx_11_0_arm64.whl"
+        sha256 "031e2d5dd4bb9caa3ca9c82e5a197fd8ae680232cee62603d1a813f3f07e3d03"
       end
 
       resource "grpcio" do
@@ -77,8 +82,8 @@ class DeepagentsCode < Formula
       end
 
       resource "jiter" do
-        url "https://files.pythonhosted.org/packages/86/59/db537c0949e83668c38481d426b9f2fd5ab758c4ee53a811dd0a510626a0/jiter-0.15.0-cp313-cp313-macosx_11_0_arm64.whl"
-        sha256 "d1e7b1776f0797956c509e123d0952d10d293a9492dea9f288ab9570ec01d1a5"
+        url "https://files.pythonhosted.org/packages/d0/2b/c3eaf16f5d7c9bad66ea32f40a95bd169b29a91217fcc7f081375157e99c/jiter-0.16.0-cp313-cp313-macosx_11_0_arm64.whl"
+        sha256 "d28bb3c26762358dadf3e5bf0bccd29ae987d65e6988d2e6f49829c76b003c09"
       end
 
       resource "jsonschema-rs" do
@@ -97,8 +102,8 @@ class DeepagentsCode < Formula
       end
 
       resource "pillow" do
-        url "https://files.pythonhosted.org/packages/71/43/905a14a8b17fdb1ccb58d282454490662d2cb89a6bfec26af6d3520da5ec/pillow-12.2.0-cp313-cp313-macosx_11_0_arm64.whl"
-        sha256 "56b25336f502b6ed02e889f4ece894a72612fe885889a6e8c4c80239ff6e5f5f"
+        url "https://files.pythonhosted.org/packages/10/76/8803c13605b763d33d156c4678fc77f8443389c0c51c8aef707bb02015f4/pillow-12.3.0-cp313-cp313-macosx_11_0_arm64.whl"
+        sha256 "d69141514cc30b774ceea5e3ed3a6635c8d8a96edf664689b890f4089111fb35"
       end
 
       resource "protobuf" do
@@ -117,13 +122,13 @@ class DeepagentsCode < Formula
       end
 
       resource "regex" do
-        url "https://files.pythonhosted.org/packages/aa/da/797e91ecec6f84135da778ddce78c20e0af5d2a15c26f87a81bc3eadb6db/regex-2026.5.9-cp313-cp313-macosx_10_13_universal2.whl"
-        sha256 "d626b84406444b165fc0ba981604edea39f0588ff1f92baa23fe50799ea9afdb"
+        url "https://files.pythonhosted.org/packages/5d/3d/84165e4299ff76f3a40fe1f2abf939e976f693383a08d2beea6af62bd2c1/regex-2026.7.19-cp313-cp313-macosx_10_13_universal2.whl"
+        sha256 "f035d9dc1d25eff9d361456572231c7d27b5ccd473ca7dc0adfce732bd006d40"
       end
 
       resource "rpds-py" do
-        url "https://files.pythonhosted.org/packages/ca/bb/d1b85117967c11191441a7274ae616c65d93901d082c588f89a50a8da5ae/rpds_py-2026.5.1-cp313-cp313-macosx_11_0_arm64.whl"
-        sha256 "c39f5b67a8a2e67179ada2a954227d670fe65fa9098457f698f56ddf248709b3"
+        url "https://files.pythonhosted.org/packages/f3/6b/686d9dc4359a8f163cfbbf89ee0b4e586431de22fe8248edb63a8cf50d49/rpds_py-2026.6.3-cp313-cp313-macosx_11_0_arm64.whl"
+        sha256 "f4d78253f6996be4901669ad25319f842f740eccf4d58e3c7f3dd39e6dde1d8f"
       end
 
       resource "sqlite-vec" do
@@ -142,13 +147,18 @@ class DeepagentsCode < Formula
       end
 
       resource "uuid-utils" do
-        url "https://files.pythonhosted.org/packages/ed/a1/3b48859953ee74fc26628ca5d9e5f848209655a0a8c934032fc596035976/uuid_utils-0.16.2-cp313-cp313-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl"
-        sha256 "c19b7d595d12923da682ed13d313c2333b9ebf214e65a47a24927a8a3a81b191"
+        url "https://files.pythonhosted.org/packages/d2/dd/614fb9912157ac0128e6050859ccf06d9f13df9a944a803e8f80f6157e38/uuid_utils-0.17.0-cp313-cp313-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl"
+        sha256 "d11a7bc1e02da8984d32e6de9e0826c6edac00eac17de270f372bf32f9a0af63"
       end
 
       resource "uvloop" do
         url "https://files.pythonhosted.org/packages/89/8c/182a2a593195bfd39842ea68ebc084e20c850806117213f5a299dfc513d9/uvloop-0.22.1-cp313-cp313-macosx_10_13_universal2.whl"
         sha256 "561577354eb94200d75aca23fbde86ee11be36b00e52a4eaf8f50fb0c86b7705"
+      end
+
+      resource "wasmtime" do
+        url "https://files.pythonhosted.org/packages/dc/b2/fc660c451b7969a9eef8d35f505837ffc8e8a21064f18255a8f0347c1318/wasmtime-47.0.1-py3-none-macosx_11_0_arm64.whl"
+        sha256 "58da69f71750e844e32614c1805246ffca4c8b032d46a8145faa26c228c6c5ac"
       end
 
       resource "watchfiles" do
@@ -162,8 +172,8 @@ class DeepagentsCode < Formula
       end
 
       resource "xxhash" do
-        url "https://files.pythonhosted.org/packages/2a/6e/46b84017b1301d54091430353d4ad5901654a3e0871649877a416f7f1644/xxhash-3.7.0-cp313-cp313-macosx_11_0_arm64.whl"
-        sha256 "91c3b07cf3362086d8f126c6aecd8e5e9396ad8b2f2219ea7e49a8250c318acd"
+        url "https://files.pythonhosted.org/packages/07/3f/5072f1f0f5714186f0ac2a0b5a4929ce30d4b845e94886b6c01b6ebda0be/xxhash-3.8.1-cp313-cp313-macosx_11_0_arm64.whl"
+        sha256 "bcab50a389cc04d87f90092af78a6adba2ab3deca63175a3344ca83514045315"
       end
 
       resource "zstandard" do
@@ -175,19 +185,24 @@ class DeepagentsCode < Formula
 
   on_linux do
     on_arm do
+      resource "bsdiff4" do
+        url "https://files.pythonhosted.org/packages/c2/e2/0cf538a786f47b08e26f3970a6f98c2b7b9d555c01e085425282944a2c7f/bsdiff4-1.2.6-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+        sha256 "39ddfa2137de44c9743a611d71d263d0cc8c45e5b18ee84ca5ff6b6240be1740"
+      end
+
       resource "cffi" do
-        url "https://files.pythonhosted.org/packages/a9/f5/a2c23eb03b61a0b8747f211eb716446c826ad66818ddc7810cc2cc19b3f2/cffi-2.0.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
-        sha256 "d48a880098c96020b02d5a1f7d9251308510ce8858940e6fa99ece33f610838b"
+        url "https://files.pythonhosted.org/packages/37/6f/3b5ce4c3b2192d250f04908f2bfd91ef34552ec8f7716a5d4abdb8d67bb2/cffi-2.1.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
+        sha256 "f16c709686a78c727bbbf059f92b0bf41c6fc60deec706d2dc19f529175a6125"
       end
 
       resource "charset-normalizer" do
-        url "https://files.pythonhosted.org/packages/2e/4e/b7f84e617b4854ade48a1b7915c8ccfadeba444d2a18c291f696e37f0d3b/charset_normalizer-3.4.7-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
-        sha256 "0ea948db76d31190bf08bd371623927ee1339d5f2a0b4b1b4a4439a65298703c"
+        url "https://files.pythonhosted.org/packages/d0/39/8ff066c672434225f8d25f8b739f992af250944392173dcc88362681c9bf/charset_normalizer-3.4.9-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
+        sha256 "21e764fd1e70b6a3e205a0e46f3051701f98a8cb3fad66eeb80e48bb502f8698"
       end
 
       resource "cryptography" do
-        url "https://files.pythonhosted.org/packages/09/41/3797cfaf69cae04a13ee78ebd83f0678d9c02b4779d21ce24445326f1a69/cryptography-49.0.0-cp311-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
-        sha256 "36d1709f992593689b45bda411498d62c6e365f2ca00b84657d4dadd24de16db"
+        url "https://files.pythonhosted.org/packages/57/ef/8f2df13c7216bcad3e1c74e07f6e193d93e998e114f524a53877c9af27ad/cryptography-50.0.0-cp311-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
+        sha256 "fd9192b7b70c573d7f214eb1ae35e00d359f6f5e4b27c7e21e30de1fc6204645"
       end
 
       resource "grpcio" do
@@ -206,8 +221,8 @@ class DeepagentsCode < Formula
       end
 
       resource "jiter" do
-        url "https://files.pythonhosted.org/packages/37/38/ea0e13b18c30ef951da0d47d39e7fa9edb82a93a62990ffbd7cea9b622d4/jiter-0.15.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
-        sha256 "351a341c2105aa430b7047e30f1bf7975f6313b00165d3fc07be2edaf741f279"
+        url "https://files.pythonhosted.org/packages/96/3f/02fdfc6705cad96127d883af5c34e4867f554f29ec7705ec1a46156400a9/jiter-0.16.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+        sha256 "0542a7189c26920778658fc8fcf2af8bae05bae9924577f71804acef37996536"
       end
 
       resource "jsonschema-rs" do
@@ -226,8 +241,8 @@ class DeepagentsCode < Formula
       end
 
       resource "pillow" do
-        url "https://files.pythonhosted.org/packages/73/dd/42107efcb777b16fa0393317eac58f5b5cf30e8392e266e76e51cff28c3d/pillow-12.2.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
-        sha256 "f1c943e96e85df3d3478f7b691f229887e143f81fedab9b20205349ab04d73ed"
+        url "https://files.pythonhosted.org/packages/1f/01/e18aff37cb0b4aac47ac90f016d347a49aca667ef97f190b06ac2aabc928/pillow-12.3.0-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl"
+        sha256 "f7401aebd7f581d7f83a439d87d474999317ee099218e5ad25d125290990ba65"
       end
 
       resource "protobuf" do
@@ -246,13 +261,13 @@ class DeepagentsCode < Formula
       end
 
       resource "regex" do
-        url "https://files.pythonhosted.org/packages/d3/9b/b3fdd62b003baa1a9b593cd8c8699c9651c2e80cc21a5c715707983c42d7/regex-2026.5.9-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
-        sha256 "aa0fbdbac82cb3e4450d0ccde7d7a35607f4cb2dd9fba4b8b69bfaf8c9fa6aed"
+        url "https://files.pythonhosted.org/packages/07/cd/42dfbabff3dfc9603c501c0e2e2c5adbb09d127b267bf5348de0af338c15/regex-2026.7.19-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
+        sha256 "0c41c63992bf1874cebb6e7f56fd7d3c007924659a604ae3d90e427d40d4fd13"
       end
 
       resource "rpds-py" do
-        url "https://files.pythonhosted.org/packages/7c/46/d84105f062e626a1b233f863907288a4708c2d833b8b4c6fb2764bc080c0/rpds_py-2026.5.1-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
-        sha256 "b5c30f3f04eef4fbd362226a6f31d7c8895ca4fbb6e0b790f6890a98d8da8559"
+        url "https://files.pythonhosted.org/packages/9e/9b/069aa329940f8207615e091f5eedbbd40e1e15eac68a0790fd05ccdf796c/rpds_py-2026.6.3-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+        sha256 "54f45a148e28767bf343d33a684693c70e451c6f4c0e9904709a723fafbdfc1f"
       end
 
       resource "sqlite-vec" do
@@ -271,13 +286,18 @@ class DeepagentsCode < Formula
       end
 
       resource "uuid-utils" do
-        url "https://files.pythonhosted.org/packages/ad/0e/8e799537ea458abaefb0f5c3b3b05304d3faf413feb0997605a3f8ae2484/uuid_utils-0.16.2-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
-        sha256 "27271b37fbc6812bb1542c4b8e22ee00223a6bf7f62b1f38d3bcf8e92f6d9acd"
+        url "https://files.pythonhosted.org/packages/18/6d/8a63e5eb2d5a6ba69a6c2036e305075bd6f5a022e7ea25fc6ce0eb7c51d2/uuid_utils-0.17.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+        sha256 "32df1944808877702ceea398c103881c09a679bb672a215e01c2a84231266bf9"
       end
 
       resource "uvloop" do
         url "https://files.pythonhosted.org/packages/b7/02/654426ce265ac19e2980bfd9ea6590ca96a56f10c76e63801a2df01c0486/uvloop-0.22.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
         sha256 "6e2ea3d6190a2968f4a14a23019d3b16870dd2190cd69c8180f7c632d21de68d"
+      end
+
+      resource "wasmtime" do
+        url "https://files.pythonhosted.org/packages/d7/93/f12469c859fed8332961c4efa68c1f1981542b9ce95248b617255938a55d/wasmtime-47.0.1-py3-none-manylinux2014_aarch64.whl"
+        sha256 "4f72162ceed1d50de8226fac6b12e1ecce54883a0c3f7355bb141eae40df488a"
       end
 
       resource "watchfiles" do
@@ -291,8 +311,8 @@ class DeepagentsCode < Formula
       end
 
       resource "xxhash" do
-        url "https://files.pythonhosted.org/packages/f3/29/a804ded9f5d3d3758292678d23e7528b08fda7b7e750688d08b052322475/xxhash-3.7.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
-        sha256 "921c14e93817842dd0dd9f372890a0f0c72e534650b6ab13c5be5cd0db11d47e"
+        url "https://files.pythonhosted.org/packages/99/a8/e10488efd31fcb13fcd6acbc6e788f10c6f8e3a0cc4ae3eb89dc19c55a12/xxhash-3.8.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
+        sha256 "32ab1e5432690276e71192be7401b55f96db2d0eedea5d44eb1f164505669cc0"
       end
 
       resource "zstandard" do
@@ -302,19 +322,24 @@ class DeepagentsCode < Formula
     end
 
     on_intel do
+      resource "bsdiff4" do
+        url "https://files.pythonhosted.org/packages/5a/1e/7027849a6dc02b580e352b1528899053bd919029b185fbaa14c6f268180b/bsdiff4-1.2.6-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+        sha256 "46313f0eb8f63efb54a3c4219cd7b5b8a7795012b535f9d0838fe3f2b3349849"
+      end
+
       resource "cffi" do
-        url "https://files.pythonhosted.org/packages/98/df/0a1755e750013a2081e863e7cd37e0cdd02664372c754e5560099eb7aa44/cffi-2.0.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
-        sha256 "c8d3b5532fc71b7a77c09192b4a5a200ea992702734a2e9279a37f2478236f26"
+        url "https://files.pythonhosted.org/packages/95/95/86342356ff5953b3fb06f7ef7c5bee212d45e770abc7218d451b9148313c/cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+        sha256 "a931079504ecc49efed7744c476a5c343a92fabf66dec2db95edb1b2fdc770e2"
       end
 
       resource "charset-normalizer" do
-        url "https://files.pythonhosted.org/packages/fa/07/330e3a0dda4c404d6da83b327270906e9654a24f6c546dc886a0eb0ffb23/charset_normalizer-3.4.7-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
-        sha256 "e044c39e41b92c845bc815e5ae4230804e8e7bc29e399b0437d64222d92809dd"
+        url "https://files.pythonhosted.org/packages/ea/f8/72eb13dcabe7257035cea8aefd922caad2f110d252bf9f67c4c2ca763aee/charset_normalizer-3.4.9-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+        sha256 "84fd18bcc17526fc2b3c1af7d2b9217d32c9c04448c16ec693b9b4f1985c3d33"
       end
 
       resource "cryptography" do
-        url "https://files.pythonhosted.org/packages/e6/8b/43011f7ebe515a8aa20d61f290a326cd890c2e738e16e59eaff8d9c3a412/cryptography-49.0.0-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
-        sha256 "0e959b578856a3924bc0cbb710fc12c387b9412a951389f3ca61704a9e25f325"
+        url "https://files.pythonhosted.org/packages/d9/41/029086c34d91052fc3b88bcc8056f709a7c915c7a23b235a54eb800b1c97/cryptography-50.0.0-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+        sha256 "06a32a980526a6ab9a4b9bf8f7385800791e2bb960903cb6b530e4817509a3b7"
       end
 
       resource "grpcio" do
@@ -333,8 +358,8 @@ class DeepagentsCode < Formula
       end
 
       resource "jiter" do
-        url "https://files.pythonhosted.org/packages/8f/7c/89fbcabb2739b7a5b8dc959a1b6c5761f6484f5fed3486854b3c789bb1de/jiter-0.15.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-        sha256 "d1aa62e277fc1cbd80e6deacae6f4d983b41b3d7728e0645c5d741a6149bba45"
+        url "https://files.pythonhosted.org/packages/0f/94/db768b6938e0df35c86beeba3dfbbb025c9ee5c19e1aa271f2396e50864d/jiter-0.16.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+        sha256 "c682bea068a90b764577bdb78a60a4c1d1606daf9cd4c893832a37c7cc9d9026"
       end
 
       resource "jsonschema-rs" do
@@ -353,8 +378,8 @@ class DeepagentsCode < Formula
       end
 
       resource "pillow" do
-        url "https://files.pythonhosted.org/packages/a8/68/b93e09e5e8549019e61acf49f65b1a8530765a7f812c77a7461bca7e4494/pillow-12.2.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
-        sha256 "03f6fab9219220f041c74aeaa2939ff0062bd5c364ba9ce037197f4c6d498cd9"
+        url "https://files.pythonhosted.org/packages/f7/62/de5bdd77d935331f4f802edc11e4d82950f642caad6cb2f949837b8560e2/pillow-12.3.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl"
+        sha256 "0847a763afefb695bc912d7c131e7e0632d4edc1d8698f58ddabec8e46b8b6d3"
       end
 
       resource "protobuf" do
@@ -373,13 +398,13 @@ class DeepagentsCode < Formula
       end
 
       resource "regex" do
-        url "https://files.pythonhosted.org/packages/30/e1/c93444052cf41581f3c884ab3fb5823daf0992f11cd4388d4275ca610558/regex-2026.5.9-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
-        sha256 "b6d189041f15691cfa2b6c4290448ec221244d225b3f5fe9e7771b34ffcdf6e2"
+        url "https://files.pythonhosted.org/packages/2a/be/ff61f28f9273658cfe23acbbac5217221f6519960ed401e61dfdab12bc35/regex-2026.7.19-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+        sha256 "c0d702548d89d572b2929879bc883bb7a4c4709efafe4512cadee56c55c9bd15"
       end
 
       resource "rpds-py" do
-        url "https://files.pythonhosted.org/packages/4b/25/05678d97fc25e2622df14dc530fb82023174ecfff6733991ed0d78f167bd/rpds_py-2026.5.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-        sha256 "b1b964e3ab599e718dc46c018d104b1ebc007cbc6567d827c94a687fca56d77e"
+        url "https://files.pythonhosted.org/packages/57/d7/fe978efc2ae50abe48eb7464668ea99f53c010c60aeebb7b35ad27f23661/rpds_py-2026.6.3-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+        sha256 "acac386b453c2516111b50985d60ce46e7fadb5ea71ae7b25f4c946935bf27cf"
       end
 
       resource "sqlite-vec" do
@@ -398,13 +423,18 @@ class DeepagentsCode < Formula
       end
 
       resource "uuid-utils" do
-        url "https://files.pythonhosted.org/packages/37/0d/c3918356932ce467b11e954d0c93697fb4652cf664957e3d9521f7ece22f/uuid_utils-0.16.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-        sha256 "fcc329be41bb6534ecb03e50596179ab76c7643ced33d13c66967d5ae1869663"
+        url "https://files.pythonhosted.org/packages/d8/79/e8e0f8b3955f2081c116157119d87659937893242eb834aa170da04d660b/uuid_utils-0.17.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+        sha256 "09a55b7a5ae764985cb46467496a1787678d0a1400356157a080ad95b1a36869"
       end
 
       resource "uvloop" do
         url "https://files.pythonhosted.org/packages/15/c0/0be24758891ef825f2065cd5db8741aaddabe3e248ee6acc5e8a80f04005/uvloop-0.22.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
         sha256 "0530a5fbad9c9e4ee3f2b33b148c6a64d47bbad8000ea63704fa8260f4cf728e"
+      end
+
+      resource "wasmtime" do
+        url "https://files.pythonhosted.org/packages/5e/ba/f321faaad1d616b94fe70a62ebb7e4054cfe41a6a46aa796ad2bb07fa08c/wasmtime-47.0.1-py3-none-manylinux1_x86_64.whl"
+        sha256 "9724600b036c6e95c4fe952e29fad83b4f02bdc11d23f25c4ee3ffff2c1d7257"
       end
 
       resource "watchfiles" do
@@ -418,8 +448,8 @@ class DeepagentsCode < Formula
       end
 
       resource "xxhash" do
-        url "https://files.pythonhosted.org/packages/65/59/172424b79f8cfd4b6d8a122b2193e6b8ad4b11f7159bb3b6f9b3191329bb/xxhash-3.7.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
-        sha256 "496736f86a9bedaf64b0dc70e3539d0766df01c71ea22032698e88f3f04a1ce9"
+        url "https://files.pythonhosted.org/packages/29/83/e361d3c1acd1b21e1d489616de6fa4aaf843365d8179f612e3743eac20a9/xxhash-3.8.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+        sha256 "98ee81b4b7f3023c9cb04a78cc67610baffcb5812d92f2096cb5a5efc6f19437"
       end
 
       resource "zstandard" do
@@ -436,8 +466,8 @@ class DeepagentsCode < Formula
 
   # Pure-Python (py3-none-any) wheels - identical across all platforms.
   resource "agent-client-protocol" do
-    url "https://files.pythonhosted.org/packages/7b/18/d8c7ff337cf621ea79a84006a7252ff057bfb5767549bb102cc6649f4ec2/agent_client_protocol-0.10.1-py3-none-any.whl"
-    sha256 "a03d3198f4d772f2e0ec012c00ac1cce131b4710220a3dc9fae3c991d047c750"
+    url "https://files.pythonhosted.org/packages/9c/c7/b84b8698879464bd8f869551bac31454bed14a3a22910f65d9693f3701bd/agent_client_protocol-0.12.0-py3-none-any.whl"
+    sha256 "233626748034896214de118f5cf5a319484ad2186705fd595219afee92237ccc"
   end
 
   resource "aiosqlite" do
@@ -446,18 +476,18 @@ class DeepagentsCode < Formula
   end
 
   resource "annotated-types" do
-    url "https://files.pythonhosted.org/packages/78/b6/6307fbef88d9b5ee7421e68d78a9f162e0da4900bc5f5793f6d3d0e34fb8/annotated_types-0.7.0-py3-none-any.whl"
-    sha256 "1f02e8b43a8fbbc3f3e0d4f0f4bfc8131bcb4eebe8849b8e5c773f3a1c582a53"
+    url "https://files.pythonhosted.org/packages/99/91/8acff4f5e50511b911bbccb72b8628a49c68ce14148cd9f6431094859a90/annotated_types-0.8.0-py3-none-any.whl"
+    sha256 "f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0"
   end
 
   resource "anthropic" do
-    url "https://files.pythonhosted.org/packages/f1/bb/09e82a81885d787f350fb55ca9df865b63140dd28b3b5b3104c4ae261657/anthropic-0.111.0-py3-none-any.whl"
-    sha256 "c14edb36ed80da9099acbd26b5cec810d76606c31f32a0d56a4cf9d4fa9e25ae"
+    url "https://files.pythonhosted.org/packages/fa/91/b3d41643f1f639927e8c5fb02c3bd8bffe6f1f29e219b3bd4c61e267b15c/anthropic-0.121.0-py3-none-any.whl"
+    sha256 "6048713fa441e59e1cba8363171cd2a86273b25bd213e9c7ac70a523af88b011"
   end
 
   resource "anyio" do
-    url "https://files.pythonhosted.org/packages/ba/16/9826f089383c593cdfc4a6e5aca94d9e91ae1692c57af82c3b2aa5e810f7/anyio-4.14.0-py3-none-any.whl"
-    sha256 "dd9b7a2a9799ed6552fde617b2c5df02b7fdd7d88392fc48101e51bae46164d9"
+    url "https://files.pythonhosted.org/packages/da/35/f2287558c17e29fafc8ef3daf819bb9834061cfa43bff8014f7df7f63bdc/anyio-4.14.2-py3-none-any.whl"
+    sha256 "9f505dda5ac9f0c8309b5e8bd445a8c2bf7246f3ce950121e45ea15bc41d1494"
   end
 
   resource "attrs" do
@@ -476,18 +506,18 @@ class DeepagentsCode < Formula
   end
 
   resource "bracex" do
-    url "https://files.pythonhosted.org/packages/9d/2a/9186535ce58db529927f6cf5990a849aa9e052eea3e2cfefe20b9e1802da/bracex-2.6-py3-none-any.whl"
-    sha256 "0b0049264e7340b3ec782b5cb99beb325f36c3782a32e36e876452fd49a09952"
+    url "https://files.pythonhosted.org/packages/b8/8f/6f7273a7adb8d73fc8d21ede4376a3e475e52f98435c6007f69100dec8ca/bracex-3.0.1-py3-none-any.whl"
+    sha256 "6523ad83aeb5098a4ee597cff0f964442ff74e460bd3fafaffab6a013ff2288c"
   end
 
   resource "certifi" do
-    url "https://files.pythonhosted.org/packages/ef/2f/c5464532e965badff2f4c4c1a3a83f5697f0d7c407ed0cda44aaa99bb451/certifi-2026.6.17-py3-none-any.whl"
-    sha256 "2227dcbaafe0d2f59279d1762ddddc37783ed4354594f194ffc31d20f41fc3db"
+    url "https://files.pythonhosted.org/packages/0b/a7/71ac2cff56fec219ed242bb11b8efb69fcc4bec75db06fb7bfe35de520e6/certifi-2026.7.22-py3-none-any.whl"
+    sha256 "62f22742b58a1a33014a2b6b706588a8d7e2a88ae7bd1a6ebe8c992928483775"
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/c7/0d/67e5b4109ea4a837e80daa87c2c696711955e40449a97e8926672534def2/click-8.4.1-py3-none-any.whl"
-    sha256 "482be17c6991b8c19c5429a1e995d9b0efdbb63172824c41f99965dc0ade8ec2"
+    url "https://files.pythonhosted.org/packages/fb/e2/79c688af8b210d232694e31e59da9f6ec747bae31c3f5946e4e9b98860d5/click-8.4.2-py3-none-any.whl"
+    sha256 "e6f9f66136c816745b9d65817da91d61d957fb16e02e4dcd0552553c5a197b76"
   end
 
   resource "cloudpickle" do
@@ -496,18 +526,18 @@ class DeepagentsCode < Formula
   end
 
   resource "croniter" do
-    url "https://files.pythonhosted.org/packages/d0/39/783980e78cb92c2d7bdb1fc7dbc86e94ccc6d58224d76a7f1f51b6c51e30/croniter-6.2.2-py3-none-any.whl"
-    sha256 "a5d17b1060974d36251ea4faf388233eca8acf0d09cbd92d35f4c4ac8f279960"
+    url "https://files.pythonhosted.org/packages/cd/ba/d678e5bd329646ca51d3c92addbc77804e86d21f4b6b6a027218e6abb010/croniter-6.2.4-py3-none-any.whl"
+    sha256 "8ef3d544107a5c05a150a2d78f8bf5a8eb9c5c4d93405a736b824109574e3f4d"
   end
 
   resource "deepagents" do
-    url "https://files.pythonhosted.org/packages/1f/81/49f1a98434b462aa60a07ef5a98437bd6a4445219b91c459e1e7e5d5564e/deepagents-0.6.10-py3-none-any.whl"
-    sha256 "21486ba213f027f7f2d5b4822bf6099f806a1d325dd33e93d3f5b9e857b2ea89"
+    url "https://files.pythonhosted.org/packages/df/c9/d4778dd09aaeb03b9653bb2be8591f3b7179ec5757a467f46e97627bccca/deepagents-0.7.5-py3-none-any.whl"
+    sha256 "a1be73d150929c5e826d67a05af6277748f25e4b53ae530b3fb1454df9e3ca95"
   end
 
   resource "deepagents-acp" do
-    url "https://files.pythonhosted.org/packages/c9/05/5cc23022dcf59543d5d26c5564754cdc8158866feba403d7527ddc788486/deepagents_acp-0.0.8-py3-none-any.whl"
-    sha256 "0380c8e804a5d5c0fa245a5b1d7dfde8a867f7a9a17ef54749a69da31ed341cf"
+    url "https://files.pythonhosted.org/packages/81/30/0e9ce37f54b9f45116a8c6aa0d6945a662edaf34e9dd5e30d6b986ab325d/deepagents_acp-0.0.9-py3-none-any.whl"
+    sha256 "f6c4693e5b49bb01bef4217beb1aed044e0e548ffeaf4affa94599218450e999"
   end
 
   resource "distro" do
@@ -520,24 +550,34 @@ class DeepagentsCode < Formula
     sha256 "b3fcbed555c47d8479be0796ef7e19c2670d428d72e96da63f3a40122860374b"
   end
 
+  resource "filelock" do
+    url "https://files.pythonhosted.org/packages/60/02/be4a57b60c7149b55b9e3b3c13f609cd8eb5307c751f22bd8fb8d262e75b/filelock-3.29.7-py3-none-any.whl"
+    sha256 "987db6f789a3a2a59f55081801b2b3697cb97e2a736b5f1a9e99b559285fbc51"
+  end
+
   resource "filetype" do
     url "https://files.pythonhosted.org/packages/18/79/1b8fa1bb3568781e84c9200f951c735f3f157429f44be0495da55894d620/filetype-1.2.0-py2.py3-none-any.whl"
     sha256 "7ce71b6880181241cf7ac8697a2f1eb6a8bd9b429f7ad6d27b8db9ba5f1c2d25"
   end
 
+  resource "genai-prices" do
+    url "https://files.pythonhosted.org/packages/6e/5e/cfe36dff790ffad6aeff8a069b6f36743987ac17053579035ee0a67635dd/genai_prices-0.1.1-py3-none-any.whl"
+    sha256 "de2e3d8ea3ca1d0d292025995c598da447a74e94f22cd3342df46941aeb5416b"
+  end
+
   resource "google-auth" do
-    url "https://files.pythonhosted.org/packages/44/71/c0321dc6d63d99946da45f7c06299b934e4f7f7da5c4f14d101bcb39adf1/google_auth-2.55.0-py3-none-any.whl"
-    sha256 "a17cef9dedf98c4ebae2fb0c48c8f75952c877cbc2efe09f329ef16c2783d88a"
+    url "https://files.pythonhosted.org/packages/bc/b3/6117b2f24065cd7e2c4f140e9a193e215f089ca8ba314cf91eb9d0b7fe0a/google_auth-2.56.3-py3-none-any.whl"
+    sha256 "8ec438808f813ad034535000261eed1067475d229d05bbf4216e78c3f2362e53"
   end
 
   resource "google-genai" do
-    url "https://files.pythonhosted.org/packages/a3/17/bb2cdd0a6c6fec32f14e85735917d1052f82430b1de58c2b606740740419/google_genai-2.9.0-py3-none-any.whl"
-    sha256 "2a79e2b08e8439f5f25c2b42f98e3f3e8ea4be9c9265f5d7321580dbaf2764f4"
+    url "https://files.pythonhosted.org/packages/b3/37/71e397a5b93d9a3c139e95acdcb00b4169ed59ae20e16616f2875170abb7/google_genai-2.17.0-py3-none-any.whl"
+    sha256 "a4835563c60aee646c9c4b261c507aa4a624710d25017012d20dc65abf3d9a54"
   end
 
   resource "googleapis-common-protos" do
-    url "https://files.pythonhosted.org/packages/e7/c8/e2645aa8ed02fd4c7a2f59d68783b65b1f3cbdfe39a6308e156509d1fee8/googleapis_common_protos-1.75.0-py3-none-any.whl"
-    sha256 "961ed60399c457ceb0ee8f285a84c870aabc9c6a832b9d37bb281b5bebde43ed"
+    url "https://files.pythonhosted.org/packages/9a/51/186c02b8549b69ccda44429cf6ff5081e4b61a602ddfe6a8020d1be31d1b/googleapis_common_protos-1.75.1-py3-none-any.whl"
+    sha256 "28a1934bcd33b9c9da66ac301a0a4227e3367f095a17d0375cb98f0a09d93b79"
   end
 
   resource "grpcio-health-checking" do
@@ -555,6 +595,11 @@ class DeepagentsCode < Formula
     sha256 "2d400746a40668fc9dec9810239072b40b4484b640a8c38fd654a024c7a1bf55"
   end
 
+  resource "httpcore2" do
+    url "https://files.pythonhosted.org/packages/9f/fb/46c52b781975c335a2bcf1072c7bbc007cbdc8d674217f5ee1daba2c848b/httpcore2-2.9.1-py3-none-any.whl"
+    sha256 "6182472379e855fe4221246a2bb7ecede403bc61c6798062ae1787d051ccde26"
+  end
+
   resource "httpx" do
     url "https://files.pythonhosted.org/packages/2a/39/e50c7c3a983047577ee07d2a9e53faf5a69493943ec3f6a384bdc792deb2/httpx-0.28.1-py3-none-any.whl"
     sha256 "d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad"
@@ -565,9 +610,19 @@ class DeepagentsCode < Formula
     sha256 "0ac1c9fe3c0afad2e0ebb25a934a59f4c7823b60792691f779fad2c5568830fc"
   end
 
+  resource "httpx2" do
+    url "https://files.pythonhosted.org/packages/13/b8/cfd91c4ab9134d386d48f0b6ac662ff3d4be6efdee59ee1c67ebc3c0487c/httpx2-2.9.1-py3-none-any.whl"
+    sha256 "1820fe14a9ab1107bfeff39259987429450b070ec0ff38cc87eb0d8c97fdc71a"
+  end
+
   resource "idna" do
     url "https://files.pythonhosted.org/packages/1e/5e/d4e9f1a599fb8e573b7b87160658329fbf28d19eac2718f51fc3def3aa5a/idna-3.18-py3-none-any.whl"
     sha256 "7f952cbe720b688055e3f87de14f5c3e5fdaa8bc3928985c4077ca689de849a2"
+  end
+
+  resource "importlib-metadata" do
+    url "https://files.pythonhosted.org/packages/fa/5e/f8e9a1d23b9c20a551a8a02ea3637b4642e22c2626e3a13a9a29cdea99eb/importlib_metadata-8.7.1-py3-none-any.whl"
+    sha256 "5a1f80bf1daa489495071efbb095d75a634cf28a8bc299581244063b53176151"
   end
 
   resource "jsonpatch" do
@@ -591,33 +646,33 @@ class DeepagentsCode < Formula
   end
 
   resource "langchain" do
-    url "https://files.pythonhosted.org/packages/59/f6/a682e68d004a2e23cae6c5c42e3c0d071bc0e7768167bd12277992f096f9/langchain-1.3.10-py3-none-any.whl"
-    sha256 "5da67f21aa56119744ad51b3e46ffac570c88f4fae0876e3b1c6a1c4bc0e344e"
+    url "https://files.pythonhosted.org/packages/a9/ec/0f942e78a621f8e3162ff1ed24284f469aaf51fb4607ee5831c626f2b2bc/langchain-1.3.14-py3-none-any.whl"
+    sha256 "4d10dbe91005952cddd56d0dc77aa108964da6bae90ab20063653957e901f782"
   end
 
   resource "langchain-anthropic" do
-    url "https://files.pythonhosted.org/packages/26/af/927dbbc5a1f5fea1a69adc2883f034cbd1430004e36f4eacd302d500393a/langchain_anthropic-1.4.6-py3-none-any.whl"
-    sha256 "dbd412a956b6b8b0716d9d8460ef71f834a6731cdbfc59e6160482a4a9fb5200"
+    url "https://files.pythonhosted.org/packages/23/d8/47fb549e91f55a54ce829b5034a21360d9383342a3bf4986188e254e89e4/langchain_anthropic-1.5.4-py3-none-any.whl"
+    sha256 "730a9cb1ad384c9f1642840469c1ebbf20237066b1635f5d4fa9876e365fceaf"
   end
 
   resource "langchain-core" do
-    url "https://files.pythonhosted.org/packages/13/d6/bdf6f0481cc57ef300d6b1eb48cf1400c0409be715d6eb3cabadd1142a09/langchain_core-1.4.8-py3-none-any.whl"
-    sha256 "d84c28b05e3ba8d4271d0827aad5b592ccdaaf986e76768c23503f0a2045e8aa"
+    url "https://files.pythonhosted.org/packages/36/e6/c7c39efe0bc7e1b7c3d8f54f85846e04c901913c3d3e99068b218558c6f1/langchain_core-1.5.3-py3-none-any.whl"
+    sha256 "48b56fa580277209594dd7baf837f5b9a2a3651613f34ff9fb1728b429df015f"
   end
 
   resource "langchain-google-genai" do
-    url "https://files.pythonhosted.org/packages/6a/82/3d4d3dc181ea1756f323dad4d5936239c2f404ea0acb5102316224280634/langchain_google_genai-4.2.5-py3-none-any.whl"
-    sha256 "289699ddb8e1076a76144f83e25e0086e4ce629b196fc103251f2a629e0756e5"
+    url "https://files.pythonhosted.org/packages/01/cb/4a2eb187b108a240d57cf8dcf67e818ca75365f769444bf5716e2823cd98/langchain_google_genai-4.3.2-py3-none-any.whl"
+    sha256 "f3b1c09b264612fd1735a9590987bfa0cccca0bc0111691543decb5a03b8667d"
   end
 
   resource "langchain-mcp-adapters" do
-    url "https://files.pythonhosted.org/packages/66/89/b4869db84ce529de6c7548319197df50c24d0f8a7412f74f889e22324036/langchain_mcp_adapters-0.3.0-py3-none-any.whl"
-    sha256 "1af511a95e028d9546502e360f95698ae8b691dbc07981fc48170c2cb1ebd7a9"
+    url "https://files.pythonhosted.org/packages/a3/5e/4f117d2500a661079a1895a6eb18954a906e458b1e45fa04a301fcdabd61/langchain_mcp_adapters-0.3.2-py3-none-any.whl"
+    sha256 "094e6b3096dbcc408417d5722f6915f164772e50c502ae3d8989405bf12c3c84"
   end
 
   resource "langchain-openai" do
-    url "https://files.pythonhosted.org/packages/03/21/cbf6c3786de881b214c8c6c9f61fe44c9c47608428676a5cd5c5b2b0cda5/langchain_openai-1.3.2-py3-none-any.whl"
-    sha256 "3d247f43bba9f85d32a374b1bdf3932a0d1e3c60913ebeadf68630de52add67e"
+    url "https://files.pythonhosted.org/packages/f9/3f/58f1dafe9548f976d6dcf9034953106bf19b0adaaa4578fe472ecfce9f38/langchain_openai-1.4.2-py3-none-any.whl"
+    sha256 "88208c5bc32dd95d21129a0d6f0ac3f6af380eed46b9fa0944c06c18ea325a49"
   end
 
   resource "langchain-protocol" do
@@ -625,29 +680,34 @@ class DeepagentsCode < Formula
     sha256 "70b53a86fbf9cedc863555effe44da192ab02d556ddbf2cf95b8873adcf41b5a"
   end
 
+  resource "langchain-quickjs" do
+    url "https://files.pythonhosted.org/packages/2e/a1/bf460ae2009f76ec2fabd263ad202f6649c6ae6cb7429f0688c4239ff759/langchain_quickjs-0.3.5-py3-none-any.whl"
+    sha256 "288b276ea7dcc3cfac2b84b7fed1079ac076e1c682bc3e4e2c2ce31d20ea2d2c"
+  end
+
   resource "langgraph" do
-    url "https://files.pythonhosted.org/packages/89/32/772db1b00a9fe42f50320d1aa20caefb76e621eff1f7218b9918093d631d/langgraph-1.2.6-py3-none-any.whl"
-    sha256 "1cf94d3ca124f84f77ce408fa1b06c3dee680a8aafffe364a8fd5d7d03eb8695"
+    url "https://files.pythonhosted.org/packages/e2/4d/3fc3e2535ee2c731130d71371848ebc6d4a9d2e8ae6060b11987ba134951/langgraph-1.2.10-py3-none-any.whl"
+    sha256 "52c48bd42fa31a1de0e1c0f0ebfe342e11ca2957b8b3563f83dbd60d8e30f921"
   end
 
   resource "langgraph-api" do
-    url "https://files.pythonhosted.org/packages/0e/38/6b0cdcaaed9b3105102b452a5a70fb08894a9511458cf00c061c4725347c/langgraph_api-0.10.0-py3-none-any.whl"
-    sha256 "f4b545bf1936c4e90bed1cc07a6852b1be37e1667007ab4736d800cc18e9f9b3"
+    url "https://files.pythonhosted.org/packages/75/1f/99376a2c96331c8cc368a55e66d5e9000736d5b11913a0b5c606b8c42668/langgraph_api-0.12.0-py3-none-any.whl"
+    sha256 "092422be8408f6d3521413697dd213888cf178f4928e54a551d6c9c4d4e78310"
   end
 
   resource "langgraph-checkpoint" do
-    url "https://files.pythonhosted.org/packages/bd/b4/71425e3e38be92611300b9cc5e46a5bf98ab23f5ea8a75b73d02a2f1413c/langgraph_checkpoint-4.1.1-py3-none-any.whl"
-    sha256 "25d29144b082827218e7bc3f1e9b0566a4bb007895cd6cc26f66a8428739f56e"
+    url "https://files.pythonhosted.org/packages/05/71/3b475f09bd57d3a5649792c66353312b4432afd843f301739dfcebd157f0/langgraph_checkpoint-4.2.0-py3-none-any.whl"
+    sha256 "0547fd228935a0b758865de3a3d6d7a2537c308895d0f9ab092ce9151b5da942"
   end
 
   resource "langgraph-checkpoint-sqlite" do
-    url "https://files.pythonhosted.org/packages/97/07/b342811a16327900af2747c752ea19676172fcddf9b592cc384031076623/langgraph_checkpoint_sqlite-3.1.0-py3-none-any.whl"
-    sha256 "cc9b40df0076feae8a9ad42ae713621b148b00ac23adc09dc1dc66090a46e5ad"
+    url "https://files.pythonhosted.org/packages/f5/b9/e458601a1718337839bcfeec9d1b27b8b16ce135be2bd50ed0395d33a878/langgraph_checkpoint_sqlite-3.1.1-py3-none-any.whl"
+    sha256 "8505c54c94a658080525d7e6780fdd4e0c078ff2566b30d399c02cc9f9af1c63"
   end
 
   resource "langgraph-cli" do
-    url "https://files.pythonhosted.org/packages/3e/b6/94cbd2ba0820caae203a915272394c576a21ab4a56dfbc93724dc8cd8e2b/langgraph_cli-0.4.30-py3-none-any.whl"
-    sha256 "9c577750c57da1a0e3407e8b83e5a0d7eaa80685fe99d95aa7f9bf0e1e73ca92"
+    url "https://files.pythonhosted.org/packages/8b/73/afe77f0c81f43b35e41dc90e5bde8c25f6518811258ee5bca1f953e41186/langgraph_cli-0.4.31-py3-none-any.whl"
+    sha256 "111da6269d6c9d8606b19264caaa8d5e6b98bb6684233853a5d55489a6e62496"
   end
 
   resource "langgraph-prebuilt" do
@@ -656,8 +716,8 @@ class DeepagentsCode < Formula
   end
 
   resource "langgraph-runtime-inmem" do
-    url "https://files.pythonhosted.org/packages/fe/df/cfb15c70fa4dcab9ea48f8fda9f4ed87d1767eea6e4d2901dc704da297ba/langgraph_runtime_inmem-0.30.0-py3-none-any.whl"
-    sha256 "08a36b83b5e32fe6e30cb25062a1e671a42e2a0206e4043cc95f41198dcbbb12"
+    url "https://files.pythonhosted.org/packages/9f/fa/68894d187f4a1fecceb13a5f3865ffa7e3199354d30db0903d549ad728d1/langgraph_runtime_inmem-0.32.1-py3-none-any.whl"
+    sha256 "605487951d4bda4945d45d9e79ac48d3ae3ab10549db0f28dcd1a5a277112152"
   end
 
   resource "langgraph-sdk" do
@@ -666,8 +726,8 @@ class DeepagentsCode < Formula
   end
 
   resource "langsmith" do
-    url "https://files.pythonhosted.org/packages/c6/64/d411be633d1c976955a09f6b3c58fbe70592d1370d262d171f7daf7e3793/langsmith-0.9.0-py3-none-any.whl"
-    sha256 "5eeccc36ff956946df8510a2b3b5a87d36c44f11bfb2e5205e9cf03d7b65ec9c"
+    url "https://files.pythonhosted.org/packages/7d/e6/e264e87ce79467aa0cc6c5e945e74050d7880394da325b3559cfdb41a186/langsmith-0.10.17-py3-none-any.whl"
+    sha256 "2a1242a0500147ed846ecbd5fe2f41c21b1652f6833b1af0f209231006f67e5e"
   end
 
   resource "linkify-it-py" do
@@ -681,13 +741,13 @@ class DeepagentsCode < Formula
   end
 
   resource "markdownify" do
-    url "https://files.pythonhosted.org/packages/43/ce/f1e3e9d959db134cedf06825fae8d5b294bd368aacdd0831a3975b7c4d55/markdownify-1.2.2-py3-none-any.whl"
-    sha256 "3f02d3cc52714084d6e589f70397b6fc9f2f3a8531481bf35e8cc39f975e186a"
+    url "https://files.pythonhosted.org/packages/04/10/fa543d484e8b1199243fe20eedd02cc5af050edebce98a7293a5773df592/markdownify-1.2.3-py3-none-any.whl"
+    sha256 "a189a0bedfd14009030fde5f85bb6f77c56897cb839b5c25315dd7d4e3e290ba"
   end
 
   resource "mcp" do
-    url "https://files.pythonhosted.org/packages/2e/e1/4c1dc1fbb688641a712d34650c3d58bbbdcb314ddb75bc5817bbf33515a4/mcp-1.28.0-py3-none-any.whl"
-    sha256 "9c1e7cf3a9125557e418ecd4fed8e9adddce81b0dfdae4d6601d700f5beb71a4"
+    url "https://files.pythonhosted.org/packages/01/c8/248b201f6d753d69fd5d6506011abbb35a946d9142b2ae311a948fd0be3d/mcp-1.29.0-py3-none-any.whl"
+    sha256 "f5a075bb611f23d6f4d080c6a1699fa62772eebc562ba9e66b306ddde1c755f7"
   end
 
   resource "mdit-py-plugins" do
@@ -701,43 +761,48 @@ class DeepagentsCode < Formula
   end
 
   resource "openai" do
-    url "https://files.pythonhosted.org/packages/a3/d2/ba767f4bbb30776c03d40906a2d3afad716a165ffa1771fc23b8992f7920/openai-2.43.0-py3-none-any.whl"
-    sha256 "65a670b54fadf2268c9e1330133373c963eb779ee969e5cbad419ec2c21dce97"
+    url "https://files.pythonhosted.org/packages/78/0f/cc6afea3542a5142c5d8fc8211c5e059a8375105d004a41dfa2c7948dbb0/openai-2.53.0-py3-none-any.whl"
+    sha256 "c694ffc747a3c4d1663ef2b07b811315a476164ee5efa3a993967349ebca7618"
   end
 
   resource "opentelemetry-api" do
-    url "https://files.pythonhosted.org/packages/a3/ca/9520cc1f3dfbbd03ac5903bbf55833e257bc64b1cf30fa8b0d6df374d821/opentelemetry_api-1.42.1-py3-none-any.whl"
-    sha256 "51a69edacadbc03a8950ace1c4c21099cacc538820ac2c9e36277e78cebba714"
+    url "https://files.pythonhosted.org/packages/91/48/28ed9e55dcf2f453128df738210a980e09f4e468a456fa3c763dbc8be70a/opentelemetry_api-1.37.0-py3-none-any.whl"
+    sha256 "accf2024d3e89faec14302213bc39550ec0f4095d1cf5ca688e1bfb1c8612f47"
   end
 
   resource "opentelemetry-exporter-otlp-proto-common" do
-    url "https://files.pythonhosted.org/packages/d6/43/2375e7612e1121a4518c17603b6e0b03ad94f565aafad53f464dc5be2bf6/opentelemetry_exporter_otlp_proto_common-1.42.1-py3-none-any.whl"
-    sha256 "f48d395ab815b444da118868977e9798ea354c25737d5cf39578ae894011c140"
+    url "https://files.pythonhosted.org/packages/08/13/b4ef09837409a777f3c0af2a5b4ba9b7af34872bc43609dda0c209e4060d/opentelemetry_exporter_otlp_proto_common-1.37.0-py3-none-any.whl"
+    sha256 "53038428449c559b0c564b8d718df3314da387109c4d36bd1b94c9a641b0292e"
   end
 
   resource "opentelemetry-exporter-otlp-proto-http" do
-    url "https://files.pythonhosted.org/packages/d3/96/82cb223a1502f0787d4bbff12907f5f8d870a50731febcd5818d93ef9555/opentelemetry_exporter_otlp_proto_http-1.42.1-py3-none-any.whl"
-    sha256 "00a16da1b312a1d6c7233d600d557c91df71125af73020f3b9a7765bd699d59d"
+    url "https://files.pythonhosted.org/packages/e9/e9/70d74a664d83976556cec395d6bfedd9b85ec1498b778367d5f93e373397/opentelemetry_exporter_otlp_proto_http-1.37.0-py3-none-any.whl"
+    sha256 "54c42b39945a6cc9d9a2a33decb876eabb9547e0dcb49df090122773447f1aef"
+  end
+
+  resource "opentelemetry-exporter-prometheus" do
+    url "https://files.pythonhosted.org/packages/a6/e3/50e9cdc5a52c2ab19585dd69e668ec9fee0343fafc4bffa919ca79230a4f/opentelemetry_exporter_prometheus-0.58b0-py3-none-any.whl"
+    sha256 "02005033a7a108ab9f3000ff3aa49e2d03a8893b5bf3431322ffa246affbf951"
   end
 
   resource "opentelemetry-proto" do
-    url "https://files.pythonhosted.org/packages/41/9d/171c02c84a76940b7e601805b3bb536985aded9168fbcc9ba52f0a730fa2/opentelemetry_proto-1.42.1-py3-none-any.whl"
-    sha256 "dedb74cba2886c59c7789b227a7a670613025a07489040050aedff6e5c0fb43c"
+    url "https://files.pythonhosted.org/packages/c4/25/f89ea66c59bd7687e218361826c969443c4fa15dfe89733f3bf1e2a9e971/opentelemetry_proto-1.37.0-py3-none-any.whl"
+    sha256 "8ed8c066ae8828bbf0c39229979bdf583a126981142378a9cbe9d6fd5701c6e2"
   end
 
   resource "opentelemetry-sdk" do
-    url "https://files.pythonhosted.org/packages/8f/6b/4287766cfbde577ae2272e8884abac325aeaac0d64f41c61d5b8cc595105/opentelemetry_sdk-1.42.1-py3-none-any.whl"
-    sha256 "083cd4bbfaa5aa7b5a9e552430d9951219967cfb27aa61feb13a77aba1fc839d"
+    url "https://files.pythonhosted.org/packages/9f/62/9f4ad6a54126fb00f7ed4bb5034964c6e4f00fcd5a905e115bd22707e20d/opentelemetry_sdk-1.37.0-py3-none-any.whl"
+    sha256 "8f3c3c22063e52475c5dbced7209495c2c16723d016d39287dfc215d1771257c"
   end
 
   resource "opentelemetry-semantic-conventions" do
-    url "https://files.pythonhosted.org/packages/cb/7a/7fe66f5f3682b1dd47d88cc4e11f1c6c0966b737de2d16671146e23c39a5/opentelemetry_semantic_conventions-0.63b1-py3-none-any.whl"
-    sha256 "dfe5ef4dee82586b746f522b818ceb298d00b3d59f660042bd79404bff8d0682"
+    url "https://files.pythonhosted.org/packages/07/90/68152b7465f50285d3ce2481b3aec2f82822e3f52e5152eeeaf516bab841/opentelemetry_semantic_conventions-0.58b0-py3-none-any.whl"
+    sha256 "5564905ab1458b96684db1340232729fce3b5375a06e140e8904c78e4f815b28"
   end
 
   resource "packaging" do
-    url "https://files.pythonhosted.org/packages/df/b2/87e62e8c3e2f4b32e5fe99e0b86d576da1312593b39f47d8ceef365e95ed/packaging-26.2-py3-none-any.whl"
-    sha256 "5fc45236b9446107ff2415ce77c807cee2862cb6fac22b8a73826d0693b0980e"
+    url "https://files.pythonhosted.org/packages/63/34/ba1c580383c9eada3711951fef0795c80b829a078d72188184bcab9dd527/packaging-26.3-py3-none-any.whl"
+    sha256 "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c"
   end
 
   resource "pathspec" do
@@ -746,18 +811,23 @@ class DeepagentsCode < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/81/e6/cd9575ac904136b3cbf7aa7ee819ef86eedb7274e46f230e94ea4342e729/platformdirs-4.10.0-py3-none-any.whl"
-    sha256 "fb516cdb12eb0d857d0cd85a7c57cea4d060bee4578d6cf5a14dfdf8cbf8784a"
+    url "https://files.pythonhosted.org/packages/4c/85/9b31b44296cfa3bb56cddb35e6a0f6578bab0b490c0806c0245e32c6110c/platformdirs-4.11.1-py3-none-any.whl"
+    sha256 "2efd27d363e8dd2e661639ffb398865a5e0a46442a11d266bf375a0e0c10e386"
+  end
+
+  resource "prometheus-client" do
+    url "https://files.pythonhosted.org/packages/eb/a3/b69efbf4143b5b9859b977770bbbabcc2796b702fa69dc40271e45cd5a56/prometheus_client-0.26.0-py3-none-any.whl"
+    sha256 "fa93d06737aa02bacd05794768508bb97d2fbee28cb3bca04eaae92f0ca953d6"
   end
 
   resource "prompt-toolkit" do
-    url "https://files.pythonhosted.org/packages/84/03/0d3ce49e2505ae70cf43bc5bb3033955d2fc9f932163e84dc0779cc47f48/prompt_toolkit-3.0.52-py3-none-any.whl"
-    sha256 "9aac639a3bbd33284347de5ad8d68ecc044b91a762dc39b7c21095fcd6a19955"
+    url "https://files.pythonhosted.org/packages/54/6f/84908cad2d6aa5144abcf7b42709fe4fdb459bc640ec7ac5786e7693dabc/prompt_toolkit-3.0.53-py3-none-any.whl"
+    sha256 "01c0891d7f9237d5e339f7d3e42cdae80b7534abb1c7c0e3352efba6231492f2"
   end
 
   resource "pyasn1" do
-    url "https://files.pythonhosted.org/packages/5d/a0/7d793dce3fa811fe047d6ae2431c672364b462850c6235ae306c0efd025f/pyasn1-0.6.3-py3-none-any.whl"
-    sha256 "a80184d120f0864a52a073acc6fc642847d0be408e7c7252f31390c0f4eadcde"
+    url "https://files.pythonhosted.org/packages/9a/3b/6163796d69c3977d1e4287bea4a6979161cbbdd170ebb430511e8e1999ce/pyasn1-0.6.4-py3-none-any.whl"
+    sha256 "deda9277cfd454080ec40b207fb6df82206a3a2688735233cdcd8d3d565f088b"
   end
 
   resource "pyasn1-modules" do
@@ -776,8 +846,8 @@ class DeepagentsCode < Formula
   end
 
   resource "pydantic-settings" do
-    url "https://files.pythonhosted.org/packages/77/c1/6e422f34e569cf8e18df68d1939c81c099d2b61e4f7d9621c8a77560799c/pydantic_settings-2.14.2-py3-none-any.whl"
-    sha256 "a20c97b37910b6550d5ea50fbcc2d4187defe58cd57070b73863d069419c9440"
+    url "https://files.pythonhosted.org/packages/30/a4/2bffa9f8e804325a09867f0e9d30795c80ea9f8d62560bd1b6ad6220eb2f/pydantic_settings-2.15.0-py3-none-any.whl"
+    sha256 "0ba092c291c94baceb5eff768aa0d56400a457585bc0175925a5a5510303da42"
   end
 
   resource "pygments" do
@@ -810,6 +880,11 @@ class DeepagentsCode < Formula
     sha256 "ff6d3f776f16878c894e52e107296ffc890e913c611b1a4ec6c44e2821fe2e23"
   end
 
+  resource "quickjs-rs" do
+    url "https://files.pythonhosted.org/packages/d0/1d/e4406d13ce9b9443dbfa59e2a2d5b3e11278ebe322b54de38ae18faf5436/quickjs_rs-0.2.5-py3-none-any.whl"
+    sha256 "e82240af1f1dd1b2e12bcf169a22a8e0e451e356f0688f2fc3bba886d9b2bb20"
+  end
+
   resource "referencing" do
     url "https://files.pythonhosted.org/packages/2c/58/ca301544e1fa93ed4f80d724bf5b194f6e4b945841c5bfd555878eea9fcb/referencing-0.37.0-py3-none-any.whl"
     sha256 "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231"
@@ -831,8 +906,8 @@ class DeepagentsCode < Formula
   end
 
   resource "setuptools" do
-    url "https://files.pythonhosted.org/packages/9d/76/f789f7a86709c6b087c5a2f52f911838cad707cc613162401badc665acfe/setuptools-82.0.1-py3-none-any.whl"
-    sha256 "a59e362652f08dcd477c78bb6e7bd9d80a7995bc73ce773050228a348ce2e5bb"
+    url "https://files.pythonhosted.org/packages/5d/40/e1e72872c6354b306daef1703549e8e83b4d43cfea356311bf722a043752/setuptools-83.0.0-py3-none-any.whl"
+    sha256 "29b23c360f22f414dc7336bb39178cc7bcbf6021ed2733cde173f09dba19abb3"
   end
 
   resource "six" do
@@ -846,8 +921,8 @@ class DeepagentsCode < Formula
   end
 
   resource "soupsieve" do
-    url "https://files.pythonhosted.org/packages/5e/f5/0c41cb68dcae6b7de4fac4188a3a9589e21fb31df21ea3a2e888db95e6c9/soupsieve-2.8.4-py3-none-any.whl"
-    sha256 "e7e6b0769c8f51ed59acab6e994b00621096cfb1c640a7509295987388fbaf65"
+    url "https://files.pythonhosted.org/packages/eb/dc/ad025c1ee131eba60c69f4dd5779b18fcf1e6b21a343e2162a84d5d133c7/soupsieve-2.9.2-py3-none-any.whl"
+    sha256 "8089a26fd974ca7a1f30276d3d8492ab266ab15af581642dfe8aa162e0c1c823"
   end
 
   resource "sse-starlette" do
@@ -856,8 +931,8 @@ class DeepagentsCode < Formula
   end
 
   resource "starlette" do
-    url "https://files.pythonhosted.org/packages/ec/bb/2799cc2ede3ed41131f8975621e7213dfc7ef4acbbaadfa440f32500c370/starlette-1.3.1-py3-none-any.whl"
-    sha256 "c7372aae11c3c3f26a42df7bd626cec2f47d03483d261d369516a615a53714c6"
+    url "https://files.pythonhosted.org/packages/75/0a/67e95f21498de41433babf7b1db0eeab449eb58872dfb831b27747a70fd0/starlette-1.4.1-py3-none-any.whl"
+    sha256 "7d078e0fbefae0d2cecfb80a799d6fb84b1c0c6acd4f14ac79d17d0e7ec27f19"
   end
 
   resource "structlog" do
@@ -866,8 +941,8 @@ class DeepagentsCode < Formula
   end
 
   resource "tavily-python" do
-    url "https://files.pythonhosted.org/packages/1b/c2/616ebcd49561d74c93099efa45fd5a4af2e528415f01351575980be0ba9e/tavily_python-0.7.26-py3-none-any.whl"
-    sha256 "9b9e7f2d10b3572444e13e9a3bf4f5341975d591cbc1306be04ef89a363e42a7"
+    url "https://files.pythonhosted.org/packages/67/dd/cf4b6668ef06670a27ed4012f2bd3663602ad5f0e1ac9b0c23e8d45d01eb/tavily_python-0.7.27-py3-none-any.whl"
+    sha256 "e5cb40cc852d108ced8a313379b7098108642eedfbd97f821296a5e1a483e9b9"
   end
 
   resource "tenacity" do
@@ -876,8 +951,8 @@ class DeepagentsCode < Formula
   end
 
   resource "textual" do
-    url "https://files.pythonhosted.org/packages/a8/f5/c1e18bc0707300a0e90204343abbf7d7acd6fb7ebe03a6d4893b99a234b8/textual-8.2.7-py3-none-any.whl"
-    sha256 "4caaa13a90bc4cf9c6c862c067ccd34fe84e9c161710a2a907a8026313b6bd73"
+    url "https://files.pythonhosted.org/packages/fb/be/35261223d9416a0751cdff1c7b4a6f881387218a12d439fe22fefebc8c04/textual-8.2.8-py3-none-any.whl"
+    sha256 "267375fd402dc8d981457212efa71f0e3365fd17bba144ba9bb3ed7563cb374a"
   end
 
   resource "textual-autocomplete" do
@@ -891,8 +966,8 @@ class DeepagentsCode < Formula
   end
 
   resource "tqdm" do
-    url "https://files.pythonhosted.org/packages/d8/8e/bb97bb0c71802080bfc8952937d174e49cfc50de5c951dd47b2496f0dcdb/tqdm-4.68.3-py3-none-any.whl"
-    sha256 "39832cc2def2789a6f29df83f172db7416cea70052c0907a57801c5f2fdccb03"
+    url "https://files.pythonhosted.org/packages/f9/1c/01bfd571a64e7f270e6bab5e33777debe0edc56759233ce84f27dec92d14/tqdm-4.70.0-py3-none-any.whl"
+    sha256 "7f585706bfddbdebf89daac705b2dfcc16890130727d3197ca62c732b4310953"
   end
 
   resource "truststore" do
@@ -901,8 +976,8 @@ class DeepagentsCode < Formula
   end
 
   resource "typing-extensions" do
-    url "https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl"
-    sha256 "f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548"
+    url "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl"
+    sha256 "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
   end
 
   resource "typing-inspection" do
@@ -921,23 +996,28 @@ class DeepagentsCode < Formula
   end
 
   resource "uvicorn" do
-    url "https://files.pythonhosted.org/packages/88/fa/e1388bbcf24ef3274f45c0c1c7b501fd14971037c1b6ee23610553307497/uvicorn-0.49.0-py3-none-any.whl"
-    sha256 "ba3d14c3ee7e41c6c654c46c9eb489d33213cdd30aa1696eab1374337c13f68f"
+    url "https://files.pythonhosted.org/packages/c7/d5/68e6e9bca63c0badf67002890a46d3784c958de45b65e1275ec583ca1f06/uvicorn-0.52.1-py3-none-any.whl"
+    sha256 "e4403f9d93188cf9d1088e9f40e3acd12630e2df8675316704379a7fc20fff6a"
   end
 
   resource "wcmatch" do
-    url "https://files.pythonhosted.org/packages/eb/d8/0d1d2e9d3fabcf5d6840362adcf05f8cf3cd06a73358140c3a97189238ae/wcmatch-10.1-py3-none-any.whl"
-    sha256 "5848ace7dbb0476e5e55ab63c6bbd529745089343427caa5537f230cc01beb8a"
+    url "https://files.pythonhosted.org/packages/28/12/f38b6fee116274d7221743caab07d765032e1370bb54cad8714f87aeb0e8/wcmatch-11.0-py3-none-any.whl"
+    sha256 "3a5977ace27e075eef67eb03d539563f1a19018b62881949a42932cf66926934"
   end
 
   resource "wcwidth" do
-    url "https://files.pythonhosted.org/packages/bd/6e/95b0e537de1f4d4301f76f944642c6da50d1511cc7b3d64dc418a66c7509/wcwidth-0.8.1-py3-none-any.whl"
-    sha256 "f453740b1e4a4f3291faa37944c555d71056c4da08d59809b307ef4feba695c8"
+    url "https://files.pythonhosted.org/packages/96/42/3e5985a0a7e57de470b320c6d6a1a67c844f6737a587f3d44dd13d1819e7/wcwidth-0.8.2-py3-none-any.whl"
+    sha256 "d63947694a0539a1d51e01eda7caf800c291020e6cdd7e28ad7b14dd33ad4f85"
   end
 
   resource "wheel" do
     url "https://files.pythonhosted.org/packages/87/1b/9e33c09813d65e248f7f773119148a612516a4bea93e9c6f545f78455b7c/wheel-0.47.0-py3-none-any.whl"
     sha256 "212281cab4dff978f6cedd499cd893e1f620791ca6ff7107cf270781e587eced"
+  end
+
+  resource "zipp" do
+    url "https://files.pythonhosted.org/packages/3a/13/547360d81e6d88d58492968ffda9f9542854f11310ee556fef14260cc886/zipp-4.1.0-py3-none-any.whl"
+    sha256 "25ad4e16390cd314347dd8f1de67a2ac538ae658ed4ab9db16029c07c188e97f"
   end
 
   # No wheel on PyPI; the pure-Python sdist is built offline at install time
