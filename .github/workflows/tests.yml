@@ -10,7 +10,10 @@ jobs:
   test-bot:
     strategy:
       matrix:
-        os: [ macos-15-intel, macos-26 ]
+        # Do not add an x86_64 macOS runner back. homebrew-core's last Intel
+        # bottle target is sonoma, so `go` is unbottled anywhere above it and
+        # test-bot skips the formula outright — no install, no test, no bottle.
+        os: [ macos-26 ]
         include:
           - os: ubuntu-latest
             container: ghcr.io/homebrew/brew:main
