@@ -29,7 +29,7 @@ jobs:
           repositories: homebrew-tap
 
       - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@b35a29a0f83ee8b8ca07b219fc8db3d7bb88ab49 # main
+        uses: Homebrew/actions/setup-homebrew@8f3d1ec8a696b3b9d9a6c3696b6c73033cab69e4 # main
         with:
           # Configure git auth with the app token so the push to main below is
           # attributed to langtions-bot (the ruleset bypass actor). git-try-push
