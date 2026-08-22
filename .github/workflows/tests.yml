@@ -13,9 +13,13 @@ jobs:
         # Do not add an x86_64 macOS runner back. homebrew-core's last Intel
         # bottle target is sonoma, so `go` is unbottled anywhere above it and
         # test-bot skips the formula outright — no install, no test, no bottle.
-        os: [ macos-26 ]
+        # Runners here are all arm64. macos-15 is Apple Silicon Sequoia, not
+        # the macos-15-intel runner dropped in #42.
+        os: [ macos-26, macos-15 ]
         include:
           - os: ubuntu-latest
+            container: ghcr.io/homebrew/brew:main
+          - os: ubuntu-24.04-arm
             container: ghcr.io/homebrew/brew:main
     runs-on: ${{ matrix.os }}
     container: ${{ matrix.container }}
