@@ -6,8 +6,80 @@ on:
       - labeled
 
 jobs:
-  pr-pull:
+  verify:
     if: contains(github.event.pull_request.labels.*.name, 'pr-pull')
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: read
+    outputs:
+      head_sha: ${{ steps.verify.outputs.head_sha }}
+      pr: ${{ steps.verify.outputs.pr }}
+    steps:
+      - name: Verify pull request and bottle run
+        id: verify
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+
+            if (pr.state !== 'open') throw new Error('pull request is not open');
+            if (pr.draft) throw new Error('pull request is still a draft');
+            if (pr.base.ref !== 'main') throw new Error(`base is ${pr.base.ref}, not main`);
+            if (!pr.labels.some((label) => label.name === 'pr-pull')) {
+              throw new Error('pr-pull label is no longer present');
+            }
+
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.number,
+              per_page: 100,
+            });
+            const offending = files.filter((file) => !/^Formula\/[^/]+\.rb$/.test(file.filename));
+            if (offending.length > 0) {
+              throw new Error(`pull request touches ${offending.map((file) => file.filename).join(', ')}`);
+            }
+
+            const botApproved = pr.user.login === 'langtions-bot[bot]' && context.actor === 'langtions-bot[bot]';
+            if (botApproved) {
+              if (pr.head.repo === null || pr.head.repo.full_name !== `${context.repo.owner}/${context.repo.repo}`) {
+                throw new Error('bot bump head is not in this repository');
+              }
+            } else {
+              const { data: permission } = await github.rest.repos.getCollaboratorPermissionLevel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                username: context.actor,
+              });
+              if (!['admin', 'maintain', 'write'].includes(permission.permission)) {
+                throw new Error(`${context.actor} cannot approve publication`);
+              }
+            }
+
+            const runs = await github.paginate(github.rest.actions.listWorkflowRuns, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'tests.yml',
+              event: 'pull_request',
+              head_sha: pr.head.sha,
+              status: 'completed',
+              per_page: 100,
+            });
+            if (!runs.some((run) => run.conclusion === 'success')) {
+              throw new Error(`no successful brew test-bot run for ${pr.head.sha}`);
+            }
+
+            core.setOutput('head_sha', pr.head.sha);
+            core.setOutput('pr', String(pr.number));
+
+  pr-pull:
+    needs: verify
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -40,6 +112,25 @@ jobs:
       - name: Set up git
         uses: Homebrew/actions/git-user-config@8f3d1ec8a696b3b9d9a6c3696b6c73033cab69e4 # main
 
+      - name: Confirm verified pull request
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          EXPECTED_HEAD_SHA: ${{ needs.verify.outputs.head_sha }}
+          PULL_REQUEST: ${{ needs.verify.outputs.pr }}
+        with:
+          script: |
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: Number(process.env.PULL_REQUEST),
+            });
+            if (pr.state !== 'open' || pr.head.sha !== process.env.EXPECTED_HEAD_SHA) {
+              throw new Error('pull request changed after verification');
+            }
+            if (!pr.labels.some((label) => label.name === 'pr-pull')) {
+              throw new Error('pr-pull label is no longer present');
+            }
+
       # Uploads bottles to ghcr and commits the bottle block to main. NOTE: a
       # NEW formula's ghcr package is created private; an org owner must make it
       # public once before `brew install` can fetch its bottles. See the README
@@ -49,16 +140,11 @@ jobs:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HOMEBREW_GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HOMEBREW_GITHUB_PACKAGES_USER: ${{ github.repository_owner }}
-          PULL_REQUEST: ${{ github.event.pull_request.number }}
-        run: brew pr-pull --debug --tap="$GITHUB_REPOSITORY" "$PULL_REQUEST"
+          PULL_REQUEST: ${{ needs.verify.outputs.pr }}
+          VERIFIED_HEAD_SHA: ${{ needs.verify.outputs.head_sha }}
+        run: brew pr-pull --debug --tap="$GITHUB_REPOSITORY" --head-sha="$VERIFIED_HEAD_SHA" "$PULL_REQUEST"
 
       - name: Push commits
         uses: Homebrew/actions/git-try-push@8f3d1ec8a696b3b9d9a6c3696b6c73033cab69e4 # main
         with:
           branch: main
-
-      - name: Delete branch
-        if: github.event.pull_request.head.repo.fork == false
-        env:
-          BRANCH: ${{ github.event.pull_request.head.ref }}
-        run: git push --delete origin "$BRANCH"
