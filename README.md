@@ -27,7 +27,7 @@ brew "<package>"
 | Package | Type | Description |
 | ------- | ---- | ----------- |
 | `langsmith-cli` | formula | Agent-first CLI (`langsmith`) for [LangSmith](https://smith.langchain.com) resources. |
-| `open-swe` | cask | Desktop client for [Open SWE](https://github.com/langchain-ai/open-swe). |
+| `open-swe-desktop` | cask | Desktop client for [Open SWE](https://github.com/langchain-ai/open-swe). |
 
 ## Maintaining
 
@@ -36,7 +36,7 @@ Packages (ghcr.io). To publish bottles for a formula, add the **`pr-pull`**
 label to its PR once `test-bot` is green; `langchain-actions-pr-bot` then
 commits the bottle block to `main` and uploads the bottles.
 
-**Releases of `open-swe` need no manual step.** Publishing a stable desktop
+**Releases of `open-swe-desktop` need no manual step.** Publishing a stable desktop
 release dispatches the `update Open SWE cask` workflow, which verifies the
 release and asset, updates the version and checksum, audits the cask, and pushes
 the update directly with the ruleset-bypass App. Nightly releases are ignored.

@@ -1,4 +1,4 @@
-cask "open-swe" do
+cask "open-swe-desktop" do
   version "0.2.6"
   sha256 "1ea806c2bbde67b98a86b615d2fea660fd70dbf51dfff9fc43ac8cba38c40d7a"
 

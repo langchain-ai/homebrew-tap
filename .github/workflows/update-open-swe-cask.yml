@@ -60,7 +60,7 @@ jobs:
           SHA256: ${{ steps.release.outputs.sha256 }}
         run: |
           ruby -e '
-            path = "Casks/open-swe.rb"
+            path = "Casks/open-swe-desktop.rb"
             cask = File.read(path)
             cask.sub!(/^  version ".*"$/, "  version \"#{ENV.fetch("VERSION")}\"") or abort "version stanza not found"
             cask.sub!(/^  sha256 ".*"$/, "  sha256 \"#{ENV.fetch("SHA256")}\"") or abort "sha256 stanza not found"
@@ -68,19 +68,19 @@ jobs:
           '
 
       - name: Audit cask
-        run: brew audit --cask --online Casks/open-swe.rb
+        run: brew audit --cask --online Casks/open-swe-desktop.rb
 
       - name: Commit update
         env:
           VERSION: ${{ steps.release.outputs.version }}
         run: |
-          if git diff --quiet -- Casks/open-swe.rb; then
-            echo "open-swe is already at ${VERSION}"
+          if git diff --quiet -- Casks/open-swe-desktop.rb; then
+            echo "open-swe-desktop is already at ${VERSION}"
             exit 0
           fi
           git config user.name "langtions-bot[bot]"
           git config user.email "261626216+langtions-bot[bot]@users.noreply.github.com"
-          git add Casks/open-swe.rb
-          git commit -m "open-swe ${VERSION}"
+          git add Casks/open-swe-desktop.rb
+          git commit -m "open-swe-desktop ${VERSION}"
           git pull --rebase origin main
           git push origin HEAD:main
