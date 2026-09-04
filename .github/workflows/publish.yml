@@ -17,11 +17,17 @@ jobs:
       head_sha: ${{ steps.verify.outputs.head_sha }}
       pr: ${{ steps.verify.outputs.pr }}
     steps:
+      - name: Check out trusted validation helper
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
       - name: Verify pull request and bottle run
         id: verify
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
+            const { classifyPackageBump } = require('./.github/scripts/package-bump-scope.cjs');
             const { data: pr } = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -41,9 +47,9 @@ jobs:
               pull_number: pr.number,
               per_page: 100,
             });
-            const offending = files.filter((file) => !/^Formula\/[^/]+\.rb$/.test(file.filename));
-            if (offending.length > 0) {
-              throw new Error(`pull request touches ${offending.map((file) => file.filename).join(', ')}`);
+            const scope = classifyPackageBump(files.map((file) => file.filename));
+            if (scope === null) {
+              throw new Error(`pull request has unsupported file scope: ${files.map((file) => file.filename).join(', ')}`);
             }
 
             const botApproved = pr.user.login === 'langtions-bot[bot]' && context.actor === 'langtions-bot[bot]';

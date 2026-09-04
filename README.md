@@ -36,10 +36,12 @@ Packages (ghcr.io). To publish bottles for a formula, add the **`pr-pull`**
 label to its PR once `test-bot` is green; `langchain-actions-pr-bot` then
 commits the bottle block to `main` and uploads the bottles.
 
-**Releases of `open-swe-desktop` need no manual step.** Publishing a stable desktop
-release dispatches the `update Open SWE cask` workflow, which verifies the
-release and asset, updates the version and checksum, audits the cask, and pushes
-the update directly with the ruleset-bypass App. Nightly releases are ignored.
+**Releases of `open-swe-desktop` need no manual step.** Publishing a stable
+desktop release dispatches the `update Open SWE cask` workflow. Homebrew
+`livecheck` finds the release and opens a same-repository bump PR. Once macOS CI
+validates the cask's style, online audit, and asset fetch, `auto pr-pull` applies
+the publish label and `brew pr-pull` lands the cask update without bottle
+artifacts. Nightly releases are ignored by `livecheck`.
 
 **Releases of `langsmith-cli` need no manual step.** Tagging a release there
 opens a bump PR here (its `bump-tap` job), and `auto pr-pull` applies the

@@ -1,12 +1,13 @@
 name: auto pr-pull
 
 # Applies the `pr-pull` label to a bump PR once `brew test-bot` is green,
-# which triggers publish.yml. This is the publish gate: `brew pr-pull` takes
-# the bottle artifacts built by that PR's own CI run, uploads them to ghcr and
-# commits them to main. Nothing downstream re-checks provenance, so the guards
+# which triggers publish.yml. This is the publish gate: `brew pr-pull` commits
+# cask updates directly and publishes formula bottle artifacts to ghcr. Nothing
+# downstream re-checks provenance, so the guards
 # in the `verify` job below are the whole security boundary — only bump PRs
-# authored by langtions-bot, on a branch in this repo, touching nothing but a
-# formula, are ever labelled. Anything else falls back to a human label.
+# authored by langtions-bot, on a branch in this repo, touching only formulae
+# or the Open SWE Desktop cask are ever labelled. Anything else falls back to
+# a human label.
 #
 # This workflow deliberately never checks out or executes the PR's code. It
 # runs in the base-repo context with a token that can write to the repo, so
@@ -36,11 +37,17 @@ jobs:
     outputs:
       pr: ${{ steps.check.outputs.pr }}
     steps:
+      - name: Check out trusted validation helper
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
       - name: Resolve PR and check it is an unmodified bot bump
         id: check
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
+            const { classifyPackageBump } = require('./.github/scripts/package-bump-scope.cjs');
             const run = context.payload.workflow_run;
 
             // workflow_run.pull_requests is unreliable (empty for forks), so
@@ -92,12 +99,12 @@ jobs:
               pull_number: pr.number,
               per_page: 100,
             });
-            const offending = files.filter((f) => !/^Formula\/[^/]+\.rb$/.test(f.filename));
-            if (offending.length > 0) {
-              return reject(`touches ${offending.map((f) => f.filename).join(', ')}`);
+            const scope = classifyPackageBump(files.map((file) => file.filename));
+            if (scope === null) {
+              return reject(`has unsupported file scope: ${files.map((file) => file.filename).join(', ')}`);
             }
 
-            core.info(`PR #${pr.number} is a clean bot bump; labelling`);
+            core.info(`PR #${pr.number} is a clean ${scope} bot bump; labelling`);
             core.setOutput('pr', String(pr.number));
 
   label:

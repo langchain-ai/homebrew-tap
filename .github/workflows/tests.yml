@@ -50,6 +50,27 @@ jobs:
       - run: brew test-bot --only-formulae --root-url=https://ghcr.io/v2/langchain-ai/tap
         if: github.event_name == 'pull_request'
 
+      - name: Detect changed casks
+        if: github.event_name == 'pull_request' && runner.os == 'macOS'
+        id: changed-casks
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              per_page: 100,
+            });
+            core.setOutput('open-swe-desktop', files.some((file) => file.filename === 'Casks/open-swe-desktop.rb'));
+
+      - name: Validate Open SWE Desktop cask
+        if: steps.changed-casks.outputs.open-swe-desktop == 'true'
+        run: |
+          brew style --cask langchain-ai/tap/open-swe-desktop
+          brew audit --cask --online langchain-ai/tap/open-swe-desktop
+          brew fetch --force langchain-ai/tap/open-swe-desktop
+
       - name: Upload bottles as artifact
         if: always() && github.event_name == 'pull_request'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
