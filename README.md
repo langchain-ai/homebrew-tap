@@ -27,6 +27,7 @@ brew "<package>"
 | Package | Type | Description |
 | ------- | ---- | ----------- |
 | `langsmith-cli` | formula | Agent-first CLI (`langsmith`) for [LangSmith](https://smith.langchain.com) resources. |
+| `open-swe-desktop` | cask | Desktop client for [Open SWE](https://github.com/langchain-ai/open-swe). |
 
 ## Maintaining
 
@@ -34,6 +35,13 @@ Formula bottles (prebuilt binaries) are built in CI and served from GitHub
 Packages (ghcr.io). To publish bottles for a formula, add the **`pr-pull`**
 label to its PR once `test-bot` is green; `langchain-actions-pr-bot` then
 commits the bottle block to `main` and uploads the bottles.
+
+**Releases of `open-swe-desktop` need no manual step.** Publishing a stable
+desktop release dispatches the `update Open SWE cask` workflow. Homebrew
+`livecheck` finds the release and opens a same-repository bump PR. Once macOS CI
+validates the cask's style, online audit, and asset fetch, `auto pr-pull` applies
+the publish label and `brew pr-pull` lands the cask update without bottle
+artifacts. Nightly releases are ignored by `livecheck`.
 
 **Releases of `langsmith-cli` need no manual step.** Tagging a release there
 opens a bump PR here (its `bump-tap` job), and `auto pr-pull` applies the

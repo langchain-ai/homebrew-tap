@@ -1,0 +1,40 @@
+name: update Open SWE cask
+
+on:
+  repository_dispatch:
+    types:
+      - open-swe-desktop-release
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: update-open-swe-cask
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: macos-latest
+    env:
+      HOMEBREW_NO_REQUIRE_TAP_TRUST: "1"
+    steps:
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: "Iv23liMFOFBcPTKFWi3S"
+          private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PRIVATE_KEY }}
+          repositories: homebrew-tap
+
+      - name: Configure git
+        uses: Homebrew/actions/git-user-config@f8d4222eb633e65c2a0157383cf80861fc7fae7f
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          username: langtions-bot[bot]
+
+      - name: Bump Open SWE Desktop
+        uses: Homebrew/actions/bump-packages@f8d4222eb633e65c2a0157383cf80861fc7fae7f
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          casks: langchain-ai/tap/open-swe-desktop
+          fork: false

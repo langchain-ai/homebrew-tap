@@ -42,6 +42,10 @@ jobs:
           key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
           restore-keys: ${{ matrix.os }}-rubygems-
 
+      - name: Test package bump scope validation
+        if: matrix.os == 'macos-15'
+        run: node --test .github/scripts/package-bump-scope.test.cjs
+
       - run: brew test-bot --only-cleanup-before
 
       - run: brew test-bot --only-setup
@@ -49,6 +53,27 @@ jobs:
       - run: brew test-bot --only-tap-syntax
       - run: brew test-bot --only-formulae --root-url=https://ghcr.io/v2/langchain-ai/tap
         if: github.event_name == 'pull_request'
+
+      - name: Detect changed casks
+        if: github.event_name == 'pull_request' && runner.os == 'macOS'
+        id: changed-casks
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              per_page: 100,
+            });
+            core.setOutput('open-swe-desktop', files.some((file) => file.filename === 'Casks/open-swe-desktop.rb'));
+
+      - name: Validate Open SWE Desktop cask
+        if: steps.changed-casks.outputs.open-swe-desktop == 'true'
+        run: |
+          brew style --cask langchain-ai/tap/open-swe-desktop
+          brew audit --cask --online langchain-ai/tap/open-swe-desktop
+          brew fetch --force langchain-ai/tap/open-swe-desktop
 
       - name: Upload bottles as artifact
         if: always() && github.event_name == 'pull_request'
