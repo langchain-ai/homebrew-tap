@@ -15,6 +15,8 @@ concurrency:
 jobs:
   update:
     runs-on: macos-latest
+    env:
+      HOMEBREW_NO_REQUIRE_TAP_TRUST: "1"
     steps:
       - name: Generate app token
         id: app-token
@@ -23,6 +25,12 @@ jobs:
           client-id: "Iv23liMFOFBcPTKFWi3S"
           private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PRIVATE_KEY }}
           repositories: homebrew-tap
+
+      - name: Configure git
+        uses: Homebrew/actions/git-user-config@f8d4222eb633e65c2a0157383cf80861fc7fae7f
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          username: langtions-bot[bot]
 
       - name: Bump Open SWE Desktop
         uses: Homebrew/actions/bump-packages@f8d4222eb633e65c2a0157383cf80861fc7fae7f

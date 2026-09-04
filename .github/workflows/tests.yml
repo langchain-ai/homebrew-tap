@@ -42,6 +42,10 @@ jobs:
           key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
           restore-keys: ${{ matrix.os }}-rubygems-
 
+      - name: Test package bump scope validation
+        if: matrix.os == 'macos-15'
+        run: node --test .github/scripts/package-bump-scope.test.cjs
+
       - run: brew test-bot --only-cleanup-before
 
       - run: brew test-bot --only-setup
