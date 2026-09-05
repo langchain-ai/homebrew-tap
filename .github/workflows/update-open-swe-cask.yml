@@ -32,6 +32,9 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
           username: langtions-bot[bot]
 
+      - name: Tap LangChain
+        run: brew tap langchain-ai/tap
+
       - name: Bump Open SWE Desktop
         uses: Homebrew/actions/bump-packages@f8d4222eb633e65c2a0157383cf80861fc7fae7f
         with:
