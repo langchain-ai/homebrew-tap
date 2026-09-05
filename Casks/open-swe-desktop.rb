@@ -1,8 +1,8 @@
 cask "open-swe-desktop" do
-  version "0.2.6"
-  sha256 "1ea806c2bbde67b98a86b615d2fea660fd70dbf51dfff9fc43ac8cba38c40d7a"
+  version "0.2.7"
+  sha256 "04d2136233c5862941f01b52c91f6ee89f698c1386b35578be6794f1ae40cfae"
 
-  url "https://github.com/langchain-ai/open-swe/releases/download/desktop-v#{version}/Open-SWE-#{version}-arm64.dmg"
+  url "https://github.com/langchain-ai/open-swe/releases/download/desktop-v#{version}/Open-SWE-#{version}-arm64-mac.dmg"
   name "Open SWE"
   desc "Cloud coding agent for software development"
   homepage "https://github.com/langchain-ai/open-swe"
