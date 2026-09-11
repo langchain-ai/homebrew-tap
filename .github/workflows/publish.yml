@@ -116,7 +116,7 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Set up git
-        uses: Homebrew/actions/git-user-config@3cdb78d0f62ad29dd32de765782654f4eedea607 # main
+        uses: Homebrew/actions/git-user-config@f8d4222eb633e65c2a0157383cf80861fc7fae7f # main
 
       - name: Confirm verified pull request
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
