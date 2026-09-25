@@ -18,6 +18,7 @@ cask "open-swe-desktop" do
   depends_on macos: :monterey
 
   app "Open SWE.app"
+  binary "#{appdir}/Open SWE.app/Contents/Resources/bin/oswe"
 
   zap trash: [
     "~/Library/Application Support/Open SWE",
