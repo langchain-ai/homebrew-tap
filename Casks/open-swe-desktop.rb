@@ -1,6 +1,6 @@
 cask "open-swe-desktop" do
-  version "0.2.13"
-  sha256 "356e9ab75737808cb37006b8c81c7e182e6c8d677db062c3f5e9cf52064c9999"
+  version "0.3.0"
+  sha256 "a20fb6cdbe394b35500aa80e99a510af256d0864a69bc6433024013bd65c648a"
 
   url "https://github.com/langchain-ai/open-swe/releases/download/desktop-v#{version}/Open-SWE-#{version}-arm64-mac.dmg"
   name "Open SWE"
