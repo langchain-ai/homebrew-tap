@@ -151,6 +151,6 @@ jobs:
         run: brew pr-pull --debug --tap="$GITHUB_REPOSITORY" --head-sha="$VERIFIED_HEAD_SHA" "$PULL_REQUEST"
 
       - name: Push commits
-        uses: Homebrew/actions/git-try-push@e99025eb970cfa124b8284a35463d87426917478 # main
+        uses: Homebrew/actions/git-try-push@eb02c69dbabdb66ff183c614f4ce7ab3c077592c # main
         with:
           branch: main
