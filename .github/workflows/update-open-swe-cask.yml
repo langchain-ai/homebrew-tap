@@ -27,7 +27,7 @@ jobs:
           repositories: homebrew-tap
 
       - name: Configure git
-        uses: Homebrew/actions/git-user-config@e99025eb970cfa124b8284a35463d87426917478
+        uses: Homebrew/actions/git-user-config@eb02c69dbabdb66ff183c614f4ce7ab3c077592c
         with:
           token: ${{ steps.app-token.outputs.token }}
           username: langtions-bot[bot]
