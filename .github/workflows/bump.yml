@@ -21,15 +21,15 @@ jobs:
       # can't persist `brew trust`, so disable the requirement for our own tap.
       HOMEBREW_NO_REQUIRE_TAP_TRUST: "1"
     steps:
-      # Mint a short-lived token for the org-installed langchain-actions-pr-bot
+      # Mint a short-lived token for the org-installed langchain-actions-pr-bot-public
       # App. A PR opened with GITHUB_TOKEN would not trigger the test-bot
       # workflow; an App-authored PR does, so the bottle CI runs on the bump.
       - name: Generate app token
         id: app-token
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
-          client-id: "Iv23liMFOFBcPTKFWi3S"
-          private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PRIVATE_KEY }}
+          client-id: ${{ vars.LANGCHAIN_ACTIONS_PR_BOT_PUBLIC_APP_ID }}
+          private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PUBLIC_PRIVATE_KEY }}
           repositories: homebrew-tap
 
       # Detects new upstream releases via `brew livecheck` and opens a PR
@@ -38,11 +38,11 @@ jobs:
         uses: dawidd6/action-homebrew-bump-formula@b12d2bc99c46444125e606142f28200ec71a1214 # v10
         with:
           token: ${{ steps.app-token.outputs.token }}
-          # Commit identity for langtions-bot[bot]. Set explicitly so the action
+          # Commit identity for langtions-bot-public[bot]. Set explicitly so the action
           # skips its GitHub `/user` API call, which app/installation tokens
           # are forbidden from making (it 403s otherwise).
-          user_name: "langtions-bot[bot]"
-          user_email: "261626216+langtions-bot[bot]@users.noreply.github.com"
+          user_name: "langtions-bot-public[bot]"
+          user_email: "342204219+langtions-bot-public[bot]@users.noreply.github.com"
           # Push the bump branch directly to the tap rather than forking: the
           # app bot has write access and cannot own a personal fork.
           no_fork: true
