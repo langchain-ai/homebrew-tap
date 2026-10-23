@@ -15,12 +15,12 @@ permissions:
 jobs:
   bump:
     runs-on: ubuntu-latest
-    env:
-      # The action re-taps langchain-ai/tap fresh; newer Homebrew refuses to
-      # load formulae from an untrusted third-party tap. An ephemeral CI runner
-      # can't persist `brew trust`, so disable the requirement for our own tap.
-      HOMEBREW_NO_REQUIRE_TAP_TRUST: "1"
     steps:
+      # Newer Homebrew refuses to load formulae from an untrusted third-party
+      # tap. Trust is keyed by name, so it holds when the action re-taps below.
+      - name: Trust LangChain tap
+        run: /home/linuxbrew/.linuxbrew/bin/brew trust --tap langchain-ai/tap
+
       # Mint a short-lived token for the org-installed langchain-actions-pr-bot-public
       # App. A PR opened with GITHUB_TOKEN would not trigger the test-bot
       # workflow; an App-authored PR does, so the bottle CI runs on the bump.
