@@ -107,7 +107,7 @@ jobs:
           repositories: homebrew-tap
 
       - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@1e34f2e2acaa766b7efacb8c26352e6abbb023f9 # main
+        uses: Homebrew/actions/setup-homebrew@eb02c69dbabdb66ff183c614f4ce7ab3c077592c # main
         with:
           # Configure git auth with the app token so the push to main below is
           # attributed to langtions-bot (the ruleset bypass actor). git-try-push
@@ -116,7 +116,7 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Set up git
-        uses: Homebrew/actions/git-user-config@1e34f2e2acaa766b7efacb8c26352e6abbb023f9 # main
+        uses: Homebrew/actions/git-user-config@eb02c69dbabdb66ff183c614f4ce7ab3c077592c # main
 
       - name: Confirm verified pull request
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -151,6 +151,6 @@ jobs:
         run: brew pr-pull --debug --tap="$GITHUB_REPOSITORY" --head-sha="$VERIFIED_HEAD_SHA" "$PULL_REQUEST"
 
       - name: Push commits
-        uses: Homebrew/actions/git-try-push@1e34f2e2acaa766b7efacb8c26352e6abbb023f9 # main
+        uses: Homebrew/actions/git-try-push@eb02c69dbabdb66ff183c614f4ce7ab3c077592c # main
         with:
           branch: main

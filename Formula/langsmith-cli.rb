@@ -1,17 +1,17 @@
 class LangsmithCli < Formula
   desc "Agent-first CLI for querying and managing LangSmith resources"
   homepage "https://github.com/langchain-ai/langsmith-cli"
-  url "https://github.com/langchain-ai/langsmith-cli/archive/refs/tags/v0.2.59.tar.gz"
-  sha256 "476e3291f52a9e84e39f0c02fbd95b37a0825561a9bc4491e693dbf83aa905f9"
+  url "https://github.com/langchain-ai/langsmith-cli/archive/refs/tags/v0.3.4.tar.gz"
+  sha256 "5591d982ea220504a1df1e28606fe8815433b394226cce6f62e1bf07d0b54661"
   license "MIT"
   head "https://github.com/langchain-ai/langsmith-cli.git", branch: "main"
 
   bottle do
     root_url "https://ghcr.io/v2/langchain-ai/tap"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f166fd14252fbd5704bc57b80f7937e194f6dbdb9b543aae83c47ec3d972e41a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0ec79665983394bfa39b66b5c2cf9fe2ee5c4db638c28acf2605d35d9d58beb5"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "989ed2f253f61f0989b2d2d621d74b856cf60bd75f182c932bb95b4e12d3fe58"
-    sha256 cellar: :any,                 x86_64_linux:  "1e9bb303d8424ea74aed1255169e89cad9313cfa41ebdec0b530c021f9104a3a"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "fbb0d4b0fec771aaba0771605f04755067e7a399afbe15788e5f89536f17e218"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "66e469715d0bf4d4bd7d6e992026d7717f22781bff0bd22a02f85aa00d88bcc6"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "037205edfe4315bfc85c169a46b2b08683eb322a18f8654b7645eab00a2e7033"
+    sha256 cellar: :any,                 x86_64_linux:  "dba77d6c7865051eb64a7a18527b475b62635fff6bd33817ff4bdbe9338ed592"
   end
 
   depends_on "go" => :build

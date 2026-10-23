@@ -1,6 +1,6 @@
 cask "open-swe-desktop" do
-  version "0.2.11"
-  sha256 "4a6273fe33320b639ca9218e72f826c87ffab5eb4cd914f3c77dc5e5c9164039"
+  version "0.3.9"
+  sha256 "ee6344a4d82c9110cd04b409e177c006a50c4f2496aea6969e04fdbbfc1cb248"
 
   url "https://github.com/langchain-ai/open-swe/releases/download/desktop-v#{version}/Open-SWE-#{version}-arm64-mac.dmg"
   name "Open SWE"
@@ -15,7 +15,7 @@ cask "open-swe-desktop" do
 
   auto_updates true
   depends_on arch: :arm64
-  depends_on macos: :monterey
+  depends_on macos: :ventura
 
   app "Open SWE.app"
   binary "#{appdir}/Open SWE.app/Contents/Resources/bin/oswe"
