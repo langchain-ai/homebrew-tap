@@ -36,7 +36,7 @@ jobs:
           brew trust --tap langchain-ai/tap
 
       - name: Bump Open SWE Desktop
-        uses: Homebrew/actions/bump-packages@4790763c0a3ba4036f72634dc079c4a7dfcd4878
+        uses: Homebrew/actions/bump-packages@d482da0e602890d3160aade42e72c8556103bf04
         with:
           token: ${{ steps.app-token.outputs.token }}
           casks: langchain-ai/tap/open-swe-desktop
