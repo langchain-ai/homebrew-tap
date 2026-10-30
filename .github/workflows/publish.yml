@@ -52,7 +52,7 @@ jobs:
               throw new Error(`pull request has unsupported file scope: ${files.map((file) => file.filename).join(', ')}`);
             }
 
-            const botApproved = pr.user.login === 'langtions-bot[bot]' && context.actor === 'langtions-bot[bot]';
+            const botApproved = pr.user.login === 'langtions-bot-public[bot]' && context.actor === 'langtions-bot-public[bot]';
             if (botApproved) {
               if (pr.head.repo === null || pr.head.repo.full_name !== `${context.repo.owner}/${context.repo.repo}`) {
                 throw new Error('bot bump head is not in this repository');
@@ -94,7 +94,7 @@ jobs:
       packages: write
       pull-requests: write
     steps:
-      # Mint a short-lived token for the org-installed langchain-actions-pr-bot
+      # Mint a short-lived token for the org-installed langchain-actions-pr-bot-public
       # App. Used only to push the bottle commit to main below: the bot is an
       # `always` bypass actor on the main ruleset, whereas GITHUB_TOKEN
       # (github-actions[bot]) is not and would be rejected.
@@ -102,15 +102,15 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
-          client-id: "Iv23liMFOFBcPTKFWi3S"
-          private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PRIVATE_KEY }}
+          client-id: ${{ vars.LANGCHAIN_ACTIONS_PR_BOT_PUBLIC_APP_ID }}
+          private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PUBLIC_PRIVATE_KEY }}
           repositories: homebrew-tap
 
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@4790763c0a3ba4036f72634dc079c4a7dfcd4878 # main
         with:
           # Configure git auth with the app token so the push to main below is
-          # attributed to langtions-bot (the ruleset bypass actor). git-try-push
+          # attributed to langtions-bot-public (the ruleset bypass actor). git-try-push
           # inherits this auth; passing a token there too sends a second
           # Authorization header and GitHub 400s ("Duplicate header").
           token: ${{ steps.app-token.outputs.token }}

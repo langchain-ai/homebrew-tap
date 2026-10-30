@@ -20,15 +20,15 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
-          client-id: "Iv23liMFOFBcPTKFWi3S"
-          private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PRIVATE_KEY }}
+          client-id: ${{ vars.LANGCHAIN_ACTIONS_PR_BOT_PUBLIC_APP_ID }}
+          private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PUBLIC_PRIVATE_KEY }}
           repositories: homebrew-tap
 
       - name: Configure git
         uses: Homebrew/actions/git-user-config@4790763c0a3ba4036f72634dc079c4a7dfcd4878
         with:
           token: ${{ steps.app-token.outputs.token }}
-          username: langtions-bot[bot]
+          username: langtions-bot-public[bot]
 
       - name: Tap LangChain
         run: |
