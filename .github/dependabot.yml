@@ -4,3 +4,15 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # Bumps auto-merge (dependabot-auto-merge.yml), so give upstream a few days
+    # to pull a bad release first. Homebrew/actions tags Mondays and this runs
+    # Fridays; going past 4 days would leave us a week behind.
+    cooldown:
+      default-days: 3
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch

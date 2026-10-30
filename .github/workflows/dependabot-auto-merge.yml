@@ -1,0 +1,123 @@
+name: dependabot auto-merge
+
+# Approves and squash-merges a Dependabot GitHub Actions bump once `brew
+# test-bot` is green on its current head. Major bumps, anything touching files
+# outside .github/workflows/, and branches with non-Dependabot commits fall
+# back to a human review.
+#
+# Runs on workflow_run, not pull_request: Dependabot-triggered pull_request
+# runs get no Actions secrets, so they can't mint the App token. This workflow
+# never checks out or executes the PR's code.
+
+on:
+  workflow_run:
+    workflows: ["brew test-bot"]
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      pr: ${{ steps.check.outputs.pr }}
+      head_sha: ${{ steps.check.outputs.head_sha }}
+    steps:
+      - name: Resolve PR and check it is a safe Dependabot bump
+        id: check
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const run = context.payload.workflow_run;
+            const repo = { owner: context.repo.owner, repo: context.repo.repo };
+
+            const { data: matches } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              ...repo,
+              commit_sha: run.head_sha,
+            });
+            if (matches.length !== 1) {
+              core.info(`head_sha ${run.head_sha} maps to ${matches.length} PRs; not merging`);
+              return;
+            }
+
+            const { data: pr } = await github.rest.pulls.get({ ...repo, pull_number: matches[0].number });
+            const reject = (why) => core.info(`PR #${pr.number}: ${why}; not merging`);
+
+            if (pr.state !== 'open') return reject('not open');
+            if (pr.draft) return reject('draft');
+            if (pr.user.login !== 'dependabot[bot]') return reject(`author is ${pr.user.login}`);
+            if (pr.head.repo === null || pr.head.repo.full_name !== `${repo.owner}/${repo.repo}`) {
+              return reject('head is a fork');
+            }
+            if (!pr.head.ref.startsWith('dependabot/github_actions/')) {
+              return reject(`branch ${pr.head.ref} is not a GitHub Actions bump`);
+            }
+            if (pr.base.ref !== 'main') return reject(`base is ${pr.base.ref}, not main`);
+            if (run.head_sha !== pr.head.sha) {
+              return reject(`test-bot ran against ${run.head_sha}, head is now ${pr.head.sha}`);
+            }
+
+            // Dependabot rebases with a single commit; extra commits mean
+            // someone pushed to the branch and a human should look.
+            const commits = await github.paginate(github.rest.pulls.listCommits, {
+              ...repo,
+              pull_number: pr.number,
+              per_page: 100,
+            });
+            if (commits.length !== 1 || commits[0].author?.login !== 'dependabot[bot]') {
+              return reject('branch has commits not authored by Dependabot');
+            }
+
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              ...repo,
+              pull_number: pr.number,
+              per_page: 100,
+            });
+            const outside = files.map((f) => f.filename).filter((f) => !f.startsWith('.github/workflows/'));
+            if (outside.length > 0) return reject(`touches ${outside.join(', ')}`);
+
+            // Dependabot records each dependency's semver change in the commit
+            // message trailer that dependabot/fetch-metadata also parses.
+            const updateTypes = [...commits[0].commit.message.matchAll(/^\s*update-type: (\S+)$/gm)].map((m) => m[1]);
+            if (updateTypes.length === 0) return reject('commit message has no update-type metadata');
+            const unsafe = updateTypes.filter((t) => t !== 'version-update:semver-patch' && t !== 'version-update:semver-minor');
+            if (unsafe.length > 0) return reject(`includes ${unsafe.join(', ')}`);
+
+            core.info(`PR #${pr.number} is a ${updateTypes.join(', ')} Dependabot bump; merging`);
+            core.setOutput('pr', String(pr.number));
+            core.setOutput('head_sha', pr.head.sha);
+
+  merge:
+    needs: verify
+    if: needs.verify.outputs.pr != ''
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      # Must be the App token: it has `workflows: write` for merging changes to
+      # .github/workflows/ and is the main ruleset's bypass actor.
+      # GITHUB_TOKEN has neither.
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          client-id: "Iv23liMFOFBcPTKFWi3S"
+          private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PRIVATE_KEY }}
+          repositories: homebrew-tap
+
+      - name: Approve and squash-merge
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          PR: ${{ needs.verify.outputs.pr }}
+          HEAD_SHA: ${{ needs.verify.outputs.head_sha }}
+        run: |
+          gh pr review "$PR" --repo "$GITHUB_REPOSITORY" --approve \
+            --body "Auto-approved: Dependabot minor/patch bump with brew test-bot green on $HEAD_SHA."
+          gh pr merge "$PR" --repo "$GITHUB_REPOSITORY" --squash --match-head-commit "$HEAD_SHA"
