@@ -26,6 +26,7 @@ jobs:
         id: verify
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
+          retries: 3
           script: |
             const { classifyPackageBump } = require('./.github/scripts/package-bump-scope.cjs');
             const { data: pr } = await github.rest.pulls.get({
@@ -124,6 +125,7 @@ jobs:
           EXPECTED_HEAD_SHA: ${{ needs.verify.outputs.head_sha }}
           PULL_REQUEST: ${{ needs.verify.outputs.pr }}
         with:
+          retries: 3
           script: |
             const { data: pr } = await github.rest.pulls.get({
               owner: context.repo.owner,
