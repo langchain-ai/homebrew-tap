@@ -75,6 +75,24 @@ jobs:
           brew audit --cask --online langchain-ai/tap/open-swe-desktop
           brew fetch --force langchain-ai/tap/open-swe-desktop
 
+      # Audit and fetch never open the DMG, so a bump whose app or binary paths
+      # no longer match the release (as when Open SWE.app became Robin.app)
+      # would pass them and auto-land. Install it and run every linked command.
+      - name: Install Open SWE Desktop cask
+        if: steps.changed-casks.outputs.open-swe-desktop == 'true'
+        run: |
+          cask=langchain-ai/tap/open-swe-desktop
+          brew install --cask "$cask"
+          info="$(brew info --cask --json=v2 "$cask")"
+          version="$(jq -r '.casks[0].version' <<<"$info")"
+          commands="$(jq -r '.casks[0].artifacts[] | select(has("binary")) | .target' <<<"$info")"
+          test -n "$commands"
+          for command in $commands; do
+            echo "$command --version"
+            test "$("$command" --version)" = "$version"
+          done
+          brew uninstall --cask "$cask"
+
       - name: Upload bottles as artifact
         if: always() && github.event_name == 'pull_request'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

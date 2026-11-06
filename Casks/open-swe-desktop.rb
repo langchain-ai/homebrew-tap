@@ -2,7 +2,15 @@ cask "open-swe-desktop" do
   version "0.3.12"
   sha256 "af36839bfbceac708cd942f5b2e33133088168080adbff5fa5dd1126d8e20620"
 
-  url "https://github.com/langchain-ai/open-swe/releases/download/desktop-v#{version}/Open-SWE-#{version}-arm64-mac.dmg"
+  # Desktop 0.3.13 renames the app to Robin: its DMG holds Robin.app, which
+  # bundles a `robin` CLI next to the legacy `oswe`. Earlier releases ship
+  # Open SWE.app with `oswe` only. Drop the Open SWE branch once the cask is
+  # past 0.3.13.
+  robin = Version.new(version) >= Version.new("0.3.13")
+  app_name = robin ? "Robin.app" : "Open SWE.app"
+
+  url "https://github.com/langchain-ai/open-swe/releases/download/desktop-v#{version}/#{robin ? "Robin" : "Open-SWE"}-#{version}-arm64-mac.dmg"
+  name "Robin"
   name "Open SWE"
   desc "Cloud coding agent for software development"
   homepage "https://github.com/langchain-ai/open-swe"
@@ -17,8 +25,10 @@ cask "open-swe-desktop" do
   depends_on arch: :arm64
   depends_on macos: :ventura
 
-  app "Open SWE.app"
-  binary "#{appdir}/Open SWE.app/Contents/Resources/bin/oswe"
+  app app_name
+  binary "#{appdir}/#{app_name}/Contents/Resources/bin/oswe"
+
+  binary "#{appdir}/#{app_name}/Contents/Resources/bin/robin" if robin
 
   zap trash: [
     "~/Library/Application Support/Open SWE",
