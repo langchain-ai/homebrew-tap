@@ -1,6 +1,6 @@
 cask "open-swe-desktop" do
-  version "0.3.12"
-  sha256 "af36839bfbceac708cd942f5b2e33133088168080adbff5fa5dd1126d8e20620"
+  version "0.3.13"
+  sha256 "c9ab0a63643c8a40937441aededd651e98fd7aaf5e6ff79885e4399e259cc44d"
 
   # Desktop 0.3.13 renames the app to Robin: its DMG holds Robin.app, which
   # bundles a `robin` CLI next to the legacy `oswe`. Earlier releases ship
