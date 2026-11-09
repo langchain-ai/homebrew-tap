@@ -1,6 +1,6 @@
 cask "open-swe-desktop" do
-  version "0.3.15"
-  sha256 "cbad544769426fcf798d59f9571bacf5a1bef5ccde70582eb2742bdbfd873b2f"
+  version "0.3.16"
+  sha256 "4baad10be38211a8f98c7ede1b0ec8c6c2aed8a27b1a1f5c6c671fd4dbe1fb56"
 
   url "https://github.com/langchain-ai/open-swe/releases/download/desktop-v#{version}/Robin-#{version}-arm64-mac.dmg"
   name "Robin"
