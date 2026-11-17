@@ -1,7 +1,7 @@
 name: bump formulae
 
 # Manual fallback, deliberately not scheduled. Upstream repos push their own
-# bumps here on tag (see langsmith-cli's release.yml `bump-tap` job), so this
+# bumps here on tag (see langsmith-cli's publish-binaries.yml `bump-tap` job), so this
 # only exists to recover a release whose push failed, and to cover formulae
 # with no push wired up. Safe to run at any time: `brew livecheck` opens
 # nothing for a formula that is already current.
@@ -32,20 +32,23 @@ jobs:
           private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PRIVATE_KEY }}
           repositories: homebrew-tap
 
-      # Detects new upstream releases via `brew livecheck` and opens a PR
-      # updating the formula's url + sha256.
-      - name: Open bump PRs for outdated formulae
-        uses: dawidd6/action-homebrew-bump-formula@b12d2bc99c46444125e606142f28200ec71a1214 # v10
-        with:
-          token: ${{ steps.app-token.outputs.token }}
-          # Commit identity for langtions-bot[bot]. Set explicitly so the action
-          # skips its GitHub `/user` API call, which app/installation tokens
-          # are forbidden from making (it 403s otherwise).
-          user_name: "langtions-bot[bot]"
-          user_email: "261626216+langtions-bot[bot]@users.noreply.github.com"
-          # Push the bump branch directly to the tap rather than forking: the
-          # app bot has write access and cannot own a personal fork.
-          no_fork: true
-          tap: langchain-ai/homebrew-tap
-          formula: langsmith-cli
-          livecheck: true
+      # Runs `brew livecheck`, then `brew bump-formula-pr` to open a PR updating
+      # the formula's url + sha256 when a newer release exists. The PR pushes
+      # straight to the tap (the App bot has write access and cannot own a
+      # fork), with the commit identity Homebrew reads from HOMEBREW_GIT_NAME
+      # and HOMEBREW_GIT_EMAIL.
+      - name: Open bump PR for langsmith-cli if outdated
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ steps.app-token.outputs.token }}
+          HOMEBREW_GIT_NAME: "langtions-bot[bot]"
+          HOMEBREW_GIT_EMAIL: "261626216+langtions-bot[bot]@users.noreply.github.com"
+        run: |
+          brew=/home/linuxbrew/.linuxbrew/bin/brew
+          formula=langchain-ai/tap/langsmith-cli
+          "$brew" tap langchain-ai/tap
+          latest=$("$brew" livecheck --formula --quiet --newer-only --json "$formula" | jq -r '.[0].version.latest // empty')
+          if [ -z "$latest" ]; then
+            echo "$formula is already current"
+            exit 0
+          fi
+          "$brew" bump-formula-pr --no-audit --no-browse --no-fork --version "$latest" "$formula"
