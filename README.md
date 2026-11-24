@@ -33,7 +33,7 @@ brew "<package>"
 
 Formula bottles (prebuilt binaries) are built in CI and served from GitHub
 Packages (ghcr.io). To publish bottles for a formula, add the **`pr-pull`**
-label to its PR once `test-bot` is green; `langchain-actions-pr-bot` then
+label to its PR once `test-bot` is green; `langchain-actions-pr-bot-public` then
 commits the bottle block to `main` and uploads the bottles.
 
 **Releases of `open-swe-desktop` need no manual step.** Publishing a stable
@@ -47,7 +47,7 @@ artifacts. Nightly releases are ignored by `livecheck`.
 opens a bump PR here (its `bump-tap` job), and `auto pr-pull` applies the
 `pr-pull` label as soon as `test-bot` is green — tag to published bottles with
 no human in the loop. `auto pr-pull` only labels PRs that are authored by
-`langtions-bot`, on a branch in this repo, and touch nothing but `Formula/*.rb`;
+`langtions-bot-public`, on a branch in this repo, and touch nothing but `Formula/*.rb`;
 anything failing those checks waits for a human label as below.
 
 **For everything else: label the bump PR — do not click Merge.** The `pr-pull`
