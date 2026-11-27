@@ -18,14 +18,14 @@ jobs:
     steps:
       - name: Generate app token
         id: app-token
-        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        uses: actions/create-github-app-token@f418cff399f7aef4c2f0ad47e25ca7a6abbdd6fc # v3.4.0
         with:
           client-id: "Iv23liMFOFBcPTKFWi3S"
           private-key: ${{ secrets.LANGCHAIN_ACTIONS_PR_BOT_PRIVATE_KEY }}
           repositories: homebrew-tap
 
       - name: Configure git
-        uses: Homebrew/actions/git-user-config@ceec4e8419bb3c97ce96e9dda7738499ed5f869d
+        uses: Homebrew/actions/git-user-config@61b401267256bb9c047d6d1481b176d5772a0ba7
         with:
           token: ${{ steps.app-token.outputs.token }}
           username: langtions-bot[bot]
@@ -36,7 +36,7 @@ jobs:
           brew trust --tap langchain-ai/tap
 
       - name: Bump Open SWE Desktop
-        uses: Homebrew/actions/bump-packages@ceec4e8419bb3c97ce96e9dda7738499ed5f869d
+        uses: Homebrew/actions/bump-packages@61b401267256bb9c047d6d1481b176d5772a0ba7
         with:
           token: ${{ steps.app-token.outputs.token }}
           casks: langchain-ai/tap/open-swe-desktop
